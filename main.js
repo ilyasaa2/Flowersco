@@ -34,23 +34,42 @@ function updateCart() {
   }
 }
 
+//Reset Keranjang
+function resetKeranjang(){
 
-//Tambah Favorit
-function tambahFavorit(event, namaProduk){
+  keranjang = [];
 
-  if(!favorit.includes(namaProduk)){
-    favorit.push(namaProduk);
+  localStorage.setItem("keranjang", JSON.stringify(keranjang));
 
-    localStorage.setItem("favorit", JSON.stringify(favorit));
+  updateCart();
 
-    updateFavorite();
-
-    event.target.classList.add("text-red-500");
-
-    alert(namaProduk + " ditambahkan ke favorit!");
-
-  }else{
-    alert("Produk sudah ada di favorit");
-  }
+  alert("Keranjang dikosongkan");
 
 }
+
+
+
+
+//Page Pesanan
+const produkList = {
+    "Pink Rose Bouqet": {
+        harga: "$15.99",
+        gambar: "images/PinkRoseBouqet.jpg",
+        kategori: "ROMANTIS"
+    },
+    "Calla Lily Bouqet": {
+        harga: "$15.99",
+        gambar: "images/CallaLilyBouquet.jpg",
+        kategori: "MINIMALIS"
+    },
+    "Cherry Blossom": {
+        harga: "$15.99",
+        gambar: "images/CherryBlossom.jpg",
+        kategori: "ELEGAN"
+    },
+    "Lavender": {
+        harga: "$15.99",
+        gambar: "images/LavenderBouquet.jpg",
+        kategori: "SUCI"
+    }
+};
