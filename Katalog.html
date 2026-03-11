@@ -20,6 +20,21 @@
   </head>
   <body class="bg-white">
     <header class="border-b">
+       <div
+      class="container mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="text-3xl font-serif text-pink-700">Flowers.co</div>
+
+        <div class="flex items-center gap-8 text-sm font-medium text-slate-700">
+          <a href="Homepage.html" class="hover:text-pink-600">Home</a>
+          <a href="Katalog.html" class="hover:text-pink-600 font-semibold text-pink-700">
+            Catalogue
+          </a>
+          <a href="AboutUs.html" class="hover:text-pink-600">About Us</a>
+        </div>
+      </div>
+    </div>
       <div
         class="py-12 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-pink-50"
       >
@@ -103,7 +118,7 @@
                 <span class="text-pink-500 font-bold">$ 15.99</span>
                 <span class="text-gray-300 line-through text-sm">$ 18.99</span>
               </div>
-              <button
+              <button onclick="tambahKeranjang('Pink Rose Bouquet')"
                 class="w-full py-3 bg-pink-500 text-white rounded-xl font-bold hover:bg-pink-600 transition shadow-lg shadow-pink-200"
               >
                 Add to bag
@@ -113,5 +128,6 @@
         </div>
       </section>
     </main>
+    <script src="main.js"></script>
   </body>
 </html>

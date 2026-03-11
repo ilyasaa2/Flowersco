@@ -1,39 +1,56 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Login Buket Bunga</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-<div class="container">
+  <body class="flex h-screen">
+    <!-- kiri -->
+    <div
+      class="flex-1 bg-cover bg-center p-10 flex flex-col justify-end text-pink-200"
+      style="background-image: url('images/bungabclogin.jpg')"
+    >
+      <h2 class="text-3xl font-bold">Flowers Your Moment</h2>
 
-    <div class="left">
-        <h2>Flowers Your Moment</h2>
-        <p>Karena setiap momen spesial pantas dirayakan dengan bunga terbaik.</p>
+      <p class="mt-2">
+        Karena setiap momen spesial pantas dirayakan dengan bunga terbaik.
+      </p>
     </div>
 
-    <div class="right">
-        <form>
-            <label>Email</label><br>
-            <input type="email" id="email" placeholder="Masukkan email"><br><br>
-            <div id="emailError"></div><br>
+    <!-- kanan -->
+    <div class="flex-1 bg-pink-50 flex justify-center items-center">
+      <form class="bg-white p-8 rounded-xl shadow-lg w-[300px]">
+        <label class="font-semibold">Email</label>
+        <input
+          type="email"
+          placeholder="Masukkan email"
+          class="w-full p-2 mt-1 mb-4 border rounded"
+        />
 
-            <label>Password</label><br>
-            <input type="password" id="password" placeholder="Masukkan password"><br><br>
-            <div id="passwordError"></div><br>
+        <label class="font-semibold">Password</label>
+        <input
+          type="password"
+          placeholder="Masukkan password"
+          class="w-full p-2 mt-1 mb-4 border rounded"
+        />
 
-            <button type="button" onclick="validateForm()">Masuk</button>
+        <button
+          class="w-full bg-pink-500 text-white p-2 rounded hover:bg-pink-600"
+        >
+          Masuk
+        </button>
 
-            <div class="links">
-                <a href="#">Lupa Password?</a>
-                <a href="Daftar.html">Daftar</a>
-            </div>
-        </form>
+        <div class="flex justify-between mt-4 text-sm">
+          <a href="#" class="text-pink-500">Lupa Password?</a>
+          <a href="Daftar.html" class="text-pink-500">Daftar</a>
+        </div>
+      </form>
     </div>
-  </div>
+  </body>
+</html>
 
 <!-- kode program javascript -->
 <script>
