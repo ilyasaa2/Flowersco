@@ -14,18 +14,180 @@
         </div>
 
         <div class="kanan">
-            <form>
+            <form id="registerForm">
                 <label>Email</label><br>
-                <input type="email" placeholder="Masukkan email"><br><br>
+                <input type="email" id="email" placeholder="Masukkan email"><br><br>
+                <div id="emailError"></div>
 
                 <label>Password</label><br>
-                <input type="password" placeholder="Masukkan password"><br><br>
+                <input type="password" id="password" placeholder="Masukkan password"><br><br>
+                <div id="passwordError"></div>
 
                 <label>Konfirmasi Password</label><br>
-                <input type="password" placeholder="Konfirmasi password"><br><br>
+                <input type="password" id="confirmPassword" placeholder="Konfirmasi password"><br><br>
+                <div id="confirmError"></div>
 
-                <button type="submit">Daftar</button>
+                <div id="successMessage"></div>
+
+                <button type="button" onclick="validateForm()">Daftar</button>
             </form>
+        </div>
+    </div>
+
+    <!-- Kode program JS -->
+     <script>
+        //Fungsi validasi form
+        function validateForm() {
+            //Mengambil elemen pesan error
+            let emailError = document.getElementById('emailError');
+            let passwordError = document.getElementById('passwordError');
+            let confirmError = document.getElementById('confirmError');
+            let successMessage = document.getElementById('successMessage');
+
+            let email = document.getElementById('email').value.trim();
+            let password = document.getElementById('password').value.trim();
+            let confirmPassword = document.getElementById('confirmPassword').value.trim();
+            
+            //Mereset semua pesan
+            emailError.innerHTML = '';
+            passwordError.innerHTML = '';
+            confirmError.innerHTML = '';
+            successMessage.innerHTML = '';
+
+            //Flag validasi
+            let isValid = true;
+
+            //Validasi email
+            if (email === '') {
+                emailError.innerHTML = 'Email harus diisi !';
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                emailError.innerHTML = 'Format email tidak valid !';
+                isValid = false;
+            } else if (isEmailRegistered(email)) {
+                emailError.innerHTML = 'Email sudah terdaftar !';
+                isValid = false;
+            }
+
+            //Validasi password
+            if (password === '') {
+                passwordError.innerHTML = 'Password tidak boleh kosong !';
+                isValid = false;
+            } else if (password.length < 6) {
+                passwordError.innerHTML = 'Password minimal 6 karakter !';
+                isValid = false;
+            } else if (!isStrongPassword(password)) {
+                passwordError.innerHTML = 'Password harus mengandung huruf besar, huruf kecil, dan angka !';
+                isValid = false;
+            }
+
+            //Validasi konfirmasi password
+            if (confirmPassword === '') {
+                confirmError.innerHTML = 'Konfirmasi password harus diisi !';
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                confirmError.innerHTML = "Password tidak cocok !";
+                isValid = false;
+            }
+
+            //Jika semua validasi berhasil
+            if (isValid) {
+                //Menyimpan user ke local storage (simulasi database)
+                saveUser(email, password);
+
+                successMessage.innerHTML = 'Registrasi berhasil, silahkan login';
+
+                //Reset form
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+                document.getElementById('confirmPassword').value = '';
+
+                //Redirect ke halaman login setelah 2 detik
+                setTimeout(function() {
+                    window.location.href = "login.html";
+                }, 2000);
+                
+            }
+             return isValid;
+        }
+
+        //Fungsi validasi format email
+        function isValidEmail(email) {
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        //Fungsi validasi kekuatan password
+        function isStrongPassword(password) {
+            //Minimal 1 huruf besar, 1 huruf kecil, 1 angka
+            let hasUpperCase = /[A-Z]/.test(password);
+            let hasLowerCase = /[a-z]/.test(password);
+            let hasNumber = /[0-9]/.test(password);
+
+            return hasUpperCase && hasLowerCase && hasNumber;
+        }
+
+        //Mengecek apakah email sudah terdaftar apa belum
+        function isEmailRegistered(email) {
+            //Mengambil data user dari local storage
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            return users.some(user => user.email === email);
+        }
+
+        //Menyimpan user ke local storage
+        function saveUser(email, password) {
+            //Mengambil data users yang sudah ada
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            //Tambah user baru
+            users.push({
+                email: email,
+                password: password, 
+                registeredAt: new Date().toISOString()
+            });
+
+            //Simpan kembali ke local storage
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        //Validasi real-time
+        document.getElementById('email').addEventListener('input', function() {
+            let emailError = document.getElementById('emailError');
+            if (this.value.trim() !== '' && !isValidEmail(this.value.trim())) {
+                emailError.innerHTML = 'Format email tidak valid !';
+            } else {
+                emailError.innerHTML = '';
+            }
+        });
+        
+        document.getElementById('password').addEventListener('input', function() {
+            let passwordError = document.getElementById('passwordError');
+            if (this.value.trim() !== '' && this.value.trim().length < 6) {
+                passwordError.innerHTML = 'Password minimal 6 karakter !';
+            } else {
+                passwordError.innerHTML = '';
+            }
+        });
+
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            let confirmError = document.getElementById('confirmError');
+            let password = document.getElementById('password').value.trim();
+            if (this.value.trim() !== '' && this.value.trim() !== password) {
+                confirmError.innerHTML = 'Password tidak cocok !';
+            } else {
+                confirmError.innerHTML = '';
+            }
+        });
+
+        //Cegah submit menggunakan tombol enter
+        document.getElementById('registerForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                validateForm();
+            }
+        });
+
+     </script>
 
     
 </body>
