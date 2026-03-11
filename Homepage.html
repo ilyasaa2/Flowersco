@@ -54,15 +54,20 @@
       >
       <div class="text-3xl font-serif text-pink-700">Flowers.co</div>
       <div class="flex items-center gap-8 text-sm font-medium text-slate-700">
-          <a href="Homepage.html" class="hover:text-pink-600">Home</a>
-          <a href="Katalog.html" class="hover:text-pink-600 font-semibold text-pink-700"
+          <a href="Homepage.html" class="hover:text-pink-600 font-semibold text-pink-700">Home</a>
+          <a href="Katalog.html" class="hover:text-pink-600 "
             >Catalogue</a>
           <a href="AboutUs.html" class="hover:text-pink-600">About Us</a>
-        </div>
+      </div>
         <div class="flex items-center gap-6 text-slate-600">
           <button id = "loginbtn" class="hover:text-pink-600 text-lg">👤</button>
-          <button class="hover:text-pink-600 text-lg">♡</button>
-          <button class="hover:text-pink-600 text-lg">🛍️</button>
+          <button class="relative text-xl"> ♡  <span id="fav-count"
+          class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-2 py-0.5 rounded-full"> 0 </span>
+          </button>
+          <button class="relative text-xl"> 🛒 
+            <span id="cart-count"
+            class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-2 py-0.5 rounded-full"> 0 </span>
+          </button>
         </div>
       </div>
     </nav>
@@ -294,6 +299,7 @@
               />
               <div class="absolute top-4 right-4">
                 <button
+                  onclick="tambahFavorit('Pink Rose Bouquet')"
                   class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md"
                 >
                   ♡
@@ -319,6 +325,7 @@
                   <p class="font-bold text-2xl text-pink-600">$ 15.99</p>
                 </div>
                 <button
+                  onclick="tambahKeranjang('Pink Rose Bouquet')"
                   class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
                 >
                   Pesan
@@ -340,6 +347,7 @@
               />
               <div class="absolute top-4 right-4">
                 <button
+                  onclick="tambahFavorit('Calla Lily Bouquet')"
                   class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md"
                 >
                   ♡
@@ -365,6 +373,7 @@
                   <p class="font-bold text-2xl text-pink-600">$ 15.99</p>
                 </div>
                 <button
+                  onclick="tambahKeranjang('Calla Lily Bouquet')"
                   class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
                 >
                   Pesan
@@ -386,6 +395,7 @@
               />
               <div class="absolute top-4 right-4">
                 <button
+                  onclick="tambahFavorit('Cherry Blossom')"
                   class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md"
                 >
                   ♡
@@ -411,6 +421,7 @@
                   <p class="font-bold text-2xl text-pink-600">$ 15.99</p>
                 </div>
                 <button
+                  onclick="tambahKeranjang('Cherry Blossom')"
                   class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
                 >
                   Pesan
@@ -432,6 +443,7 @@
               />
               <div class="absolute top-4 right-4">
                 <button
+                  onclick="tambahFavorit('Lavender')"
                   class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md"
                 >
                   ♡
@@ -457,6 +469,7 @@
                   <p class="font-bold text-2xl text-pink-600">$ 15.99</p>
                 </div>
                 <button
+                   onclick="tambahKeranjang('Lavender')"
                   class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
                 >
                   Pesan
