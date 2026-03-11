@@ -18,12 +18,14 @@
     <div class="right">
         <form>
             <label>Email</label><br>
-            <input type="email" placeholder="Masukkan email"><br><br>
+            <input type="email" id="email" placeholder="Masukkan email"><br><br>
+            <div id="emailError"></div><br>
 
             <label>Password</label><br>
-            <input type="password" placeholder="Masukkan password"><br><br>
+            <input type="password" id="password" placeholder="Masukkan password"><br><br>
+            <div id="passwordError"></div><br>
 
-            <button type="submit">Masuk</button>
+            <button type="button" onclick="validateForm()">Masuk</button>
 
             <div class="links">
                 <a href="#">Lupa Password?</a>
@@ -33,5 +35,43 @@
     </div>
   </div>
 
+<!-- kode program javascript -->
+<script>
+    //Fungsi untuk validasi form login
+    function validateForm() {
+        //Membiarkan variabel mendapatkan value berdasarkan ID email dan password pada HTML
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+        let emailError = document.getElementById('emailError');
+        let passwordError = document.getElementById('passwordError');
+
+        //Mengambil elemen pesan error
+        emailError.innerHTML = '' ;
+        passwordError.innerHTML = '' ;
+
+        //Validasi email dan password
+        if (email === '') {
+            emailError.innerHTML = 'Email harus diisi !';
+            return false;
+        } else if (!isValidEmail(email)) {
+            emailError.innerHTML = "Format email tidak valid !";
+            return false;
+        }
+
+        if (password === '') {
+            passwordError.innerHTML = "Password harus diisi !";
+            return false;
+        } 
+        
+        alert('Login Berhasil !');
+        return true;
+        
+    }
+
+    //Fungsi untuk memvalidasi format email
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+</script>
 </body>
 </html>
