@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
 //Tambah pesannan
 let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
 

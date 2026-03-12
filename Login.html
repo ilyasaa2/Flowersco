@@ -103,9 +103,10 @@
             } 
             
             alert('Login Berhasil !');
+            window.location.href = "Homepage.html"
             return true;
         }
-
+          
         function isValidEmail(email) {
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }

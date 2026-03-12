@@ -11,17 +11,43 @@
     />
   </head>
   <body class="bg-white">
-          <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+    <nav class="bg-white sticky top-0 z-50 bg-white shadow">
+      <div
+        class="container mx-auto px-6 py-4 flex items-center justify-between"
+      >
         <div class="text-3xl font-serif text-pink-700">Flowers.co</div>
-
         <div class="flex items-center gap-8 text-sm font-medium text-slate-700">
-          <a href="Homepage.html" class="hover:text-pink-600">Home</a>
-          <a href="Katalog.html" class="hover:text-pink-600 ">
-            Catalogue
+          <a
+            href="Homepage.html"
+            class="hover:text-pink-600 font-semibold text-pink-700"
+            >Home</a
+          >
+          <a href="Katalog.html" class="hover:text-pink-600">Catalogue</a>
+          <a href="AboutUs.html" class="hover:text-pink-600">About Us</a>
+        </div>
+        <div class="flex items-center gap-6 text-slate-600">
+          <button id="loginbtn" class="hover:text-pink-600 text-lg">👤</button>
+          <button class="relative text-xl">
+            ♡
+            <span
+              id="fav-count"
+              class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-2 py-0.5 rounded-full"
+            >
+              0
+            </span>
+          </button>
+          <a href="Keranjang.html" class="relative text-xl">
+            🛒
+            <span
+              id="cart-count"
+              class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-2 py-0.5 rounded-full"
+            >
+              0
+            </span>
           </a>
-          <a href="AboutUs.html" class="hover:text-pink-600 font-semibold text-pink-700" >About Us</a>
         </div>
       </div>
+    </nav>
     <section class="py-20">
       <div
         class="container mx-auto px-6 grid md:grid-cols-2 items-center gap-16"
