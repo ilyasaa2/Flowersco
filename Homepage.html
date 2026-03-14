@@ -45,25 +45,97 @@
       .font-serif {
         font-family: "Playfair Display", serif;
       }
+
+      @keyframes heartBeat {
+        0% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(1.3);
+        }
+        50% {
+          transform: scale(1);
+        }
+        75% {
+          transform: scale(1.3);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .animate-wishlist {
+        animation: heartBeat 0.4s ease-in-out;
+        color: #db2777 !important; /* Berubah jadi pink tua saat ditekan */
+      }
     </style>
   </head>
   <body class="bg-white text-slate-800">
-    <nav class="bg-white sticky top-0 z-50">
+    <nav class="bg-white sticky top-0 z-50 bg-white shadow">
       <div
         class="container mx-auto px-6 py-4 flex items-center justify-between"
       >
-        <div class="text-3xl font-serif text-pink-700">Flowers.co</div>
+        <a
+          href="Homepage.html"
+          class="text-3xl font-serif text-pink-700 hover:opacity-80 transition-opacity cursor-pointer"
+        >
+          Flowers.co
+        </a>
         <div class="flex items-center gap-8 text-sm font-medium text-slate-700">
-          <a href="#" class="hover:text-pink-600">Home</a>
-          <a href="#" class="hover:text-pink-600 font-semibold text-pink-700"
-            >Catalogue</a
+          <a
+            href="Homepage.html"
+            class="hover:text-pink-600 font-semibold text-pink-700"
+            >Home</a
           >
-          <a href="#" class="hover:text-pink-600">About Us</a>
+          <a href="Katalog.html" class="hover:text-pink-600">Catalogue</a>
+          <a href="AboutUs.html" class="hover:text-pink-600">About Us</a>
         </div>
         <div class="flex items-center gap-6 text-slate-600">
-          <button class="hover:text-pink-600 text-lg">👤</button>
-          <button class="hover:text-pink-600 text-lg">♡</button>
-          <button class="hover:text-pink-600 text-lg">🛍️</button>
+          <button id="loginbtn" class="hover:text-pink-600 text-lg">👤</button>
+          <button class="relative text-xl">
+            <a href="Wishlist.html" class="relative group">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+              <span
+                id="fav-count"
+                class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
+                >0</span
+              >
+            </a>
+          </button>
+          <a href="Keranjang.html" class="relative group">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
+            </svg>
+            <span
+              id="cart-count"
+              class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
+              >0</span
+            >
+          </a>
         </div>
       </div>
     </nav>
@@ -96,7 +168,8 @@
               Jelajahi Koleksi <span class="ml-2">→</span>
             </a>
             <a
-              href="#"
+              href="https://wa.me/6285184709553"
+              target="_blank"
               class="px-10 py-5 bg-white border-2 border-pink-600 text-pink-600 rounded-xl font-bold hover:bg-pink-50 transition-all"
             >
               Hubungi Kami
@@ -273,7 +346,7 @@
             </p>
           </div>
           <a
-            href="#"
+            href="Katalog.html"
             class="text-pink-600 font-bold text-lg flex items-center gap-2 hover:text-pink-700 transition-colors"
           >
             Lihat Semua <span class="text-xl">→</span>
@@ -294,7 +367,8 @@
               />
               <div class="absolute top-4 right-4">
                 <button
-                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md"
+                  onclick="tambahFavorit('Pink Rose Bouquet')"
+                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all"
                 >
                   ♡
                 </button>
@@ -319,6 +393,7 @@
                   <p class="font-bold text-2xl text-pink-600">$ 15.99</p>
                 </div>
                 <button
+                  onclick="tambahKeranjang('Pink Rose Bouquet')"
                   class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
                 >
                   Pesan
@@ -340,7 +415,8 @@
               />
               <div class="absolute top-4 right-4">
                 <button
-                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md"
+                  onclick="tambahFavorit('Calla Lily Bouquet')"
+                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all"
                 >
                   ♡
                 </button>
@@ -365,6 +441,7 @@
                   <p class="font-bold text-2xl text-pink-600">$ 15.99</p>
                 </div>
                 <button
+                  onclick="tambahKeranjang('Calla Lily Bouquet')"
                   class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
                 >
                   Pesan
@@ -386,7 +463,8 @@
               />
               <div class="absolute top-4 right-4">
                 <button
-                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md"
+                  onclick="tambahFavorit('Cherry Blossom')"
+                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all"
                 >
                   ♡
                 </button>
@@ -411,6 +489,7 @@
                   <p class="font-bold text-2xl text-pink-600">$ 15.99</p>
                 </div>
                 <button
+                  onclick="tambahKeranjang('Cherry Blossom')"
                   class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
                 >
                   Pesan
@@ -432,7 +511,8 @@
               />
               <div class="absolute top-4 right-4">
                 <button
-                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md"
+                  onclick="tambahFavorit('Lavender')"
+                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all"
                 >
                   ♡
                 </button>
@@ -457,6 +537,7 @@
                   <p class="font-bold text-2xl text-pink-600">$ 15.99</p>
                 </div>
                 <button
+                  onclick="tambahKeranjang('Lavender')"
                   class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
                 >
                   Pesan
@@ -566,7 +647,8 @@
             </p>
             <div class="pt-8">
               <a
-                href="#"
+                href="https://wa.me/6285184709553?text=Halo%20Flowers.co,%20saya%20ingin%20konsultasi%20buket%20bunga"
+                target="_blank"
                 class="inline-flex items-center gap-3 px-10 py-5 bg-pink-600 text-white rounded-2xl font-bold text-lg hover:bg-pink-700 transition-all shadow-xl shadow-pink-600/30"
               >
                 Hubungi Kami Sekarang <span class="text-2xl">→</span>
@@ -618,17 +700,23 @@
           </h4>
           <ul class="space-y-4 text-slate-600 text-sm font-medium">
             <li>
-              <a href="#" class="hover:text-pink-600 transition-colors"
+              <a
+                href="Homepage.html"
+                class="hover:text-pink-600 transition-colors"
                 >Beranda</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-pink-600 transition-colors"
+              <a
+                href="Katalog.html"
+                class="hover:text-pink-600 transition-colors"
                 >Katalog</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-pink-600 transition-colors"
+              <a
+                href="AboutUs.html"
+                class="hover:text-pink-600 transition-colors"
                 >Tentang Kami</a
               >
             </li>
@@ -642,22 +730,30 @@
           </h4>
           <ul class="space-y-4 text-slate-600 text-sm font-medium">
             <li>
-              <a href="#" class="hover:text-pink-600 transition-colors"
+              <a
+                href="Katalog.html?filter=ELEGAN"
+                class="hover:text-pink-600 transition-colors"
                 >Buket Ulang Tahun</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-pink-600 transition-colors"
+              <a
+                href="Katalog.html?filter=SUCI"
+                class="hover:text-pink-600 transition-colors"
                 >Buket Pernikahan</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-pink-600 transition-colors"
+              <a
+                href="Katalog.html?filter=ROMANTIS"
+                class="hover:text-pink-600 transition-colors"
                 >Buket Anniversary</a
               >
             </li>
             <li>
-              <a href="#" class="hover:text-pink-600 transition-colors"
+              <a
+                href="Katalog.html?filter=MINIMALIS"
+                class="hover:text-pink-600 transition-colors"
                 >Buket Wisuda</a
               >
             </li>
@@ -688,5 +784,6 @@
         Indonesia.
       </div>
     </footer>
+    <script src="main.js"></script>
   </body>
 </html>

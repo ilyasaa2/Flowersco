@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Katalog - Flowersco.</title>
+    <title>Katalog - Flowers.co</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600&display=swap"
@@ -16,18 +16,95 @@
       .font-serif {
         font-family: "Playfair Display", serif;
       }
+      .category-active {
+        color: #db2777;
+        font-weight: 700;
+        background-color: #fdf2f8;
+        border-radius: 9999px;
+        padding-left: 12px;
+      }
     </style>
   </head>
   <body class="bg-white">
     <header class="border-b">
-      <div
-        class="py-12 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-pink-50"
-      >
+      <nav class="bg-white sticky top-0 z-50 bg-white shadow">
+        <div
+          class="container mx-auto px-6 py-4 flex items-center justify-between"
+        >
+          <a
+            href="Homepage.html"
+            class="text-3xl font-serif text-pink-700 hover:opacity-80 transition-opacity cursor-pointer"
+          >
+            Flowers.co
+          </a>
+          <div
+            class="flex items-center gap-8 text-sm font-medium text-slate-700"
+          >
+            <a
+              href="Homepage.html"
+              class="hover:text-pink-600 font-semibold text-pink-700"
+              >Home</a
+            >
+            <a href="Katalog.html" class="hover:text-pink-600">Catalogue</a>
+            <a href="AboutUs.html" class="hover:text-pink-600">About Us</a>
+          </div>
+          <div class="flex items-center gap-6 text-slate-600">
+            <button id="loginbtn" class="hover:text-pink-600 text-lg">
+              👤
+            </button>
+            <button class="relative text-xl">
+              <a href="Wishlist.html" class="relative group">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+                <span
+                  id="fav-count"
+                  class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
+                  >0</span
+                >
+              </a>
+            </button>
+            <a href="Keranjang.html" class="relative group">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              <span
+                id="cart-count"
+                class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
+                >0</span
+              >
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div class="py-12 bg-pink-50 border-b border-pink-100">
         <div class="container mx-auto px-6 text-center">
           <h2 class="text-5xl font-serif italic text-pink-600 mb-2">
             Catalogue
           </h2>
-          <p class="text-gray-400 italic">
+          <p class="text-gray-400 italic font-light">
             Temukan buket yang sempurna untuk setiap acara
           </p>
         </div>
@@ -36,11 +113,14 @@
 
     <main class="container mx-auto px-6 py-10 flex flex-col md:flex-row gap-8">
       <aside class="w-full md:w-1/4">
-        <div class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm">
+        <div
+          class="bg-white p-6 rounded-3xl border border-pink-100 shadow-sm sticky top-24"
+        >
           <input
             type="text"
+            id="searchInput"
             placeholder="Cari Produk..."
-            class="w-full px-4 py-2 border border-pink-100 rounded-full focus:ring-2 focus:ring-pink-300 outline-none mb-6"
+            class="w-full px-5 py-3 border border-pink-100 rounded-full focus:ring-2 focus:ring-pink-300 outline-none mb-8 text-sm transition-all"
           />
 
           <h3
@@ -48,24 +128,39 @@
           >
             Kategori
           </h3>
-          <ul class="space-y-4 text-gray-600">
+          <ul id="categoryList" class="space-y-2 text-gray-500 font-medium">
             <li
-              class="flex items-center gap-3 hover:text-pink-500 cursor-pointer"
+              onclick="filterProduk('SEMUA')"
+              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all category-active"
+              data-cat="SEMUA"
+            >
+              ✨ Semua Produk
+            </li>
+            <li
+              onclick="filterProduk('ROMANTIS')"
+              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
+              data-cat="ROMANTIS"
             >
               <span>⭐</span> Anniversary
             </li>
             <li
-              class="flex items-center gap-3 hover:text-pink-500 cursor-pointer"
+              onclick="filterProduk('ELEGAN')"
+              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
+              data-cat="ELEGAN"
             >
               <span>🎂</span> Ulang Tahun
             </li>
             <li
-              class="flex items-center gap-3 hover:text-pink-500 cursor-pointer"
+              onclick="filterProduk('MINIMALIS')"
+              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
+              data-cat="MINIMALIS"
             >
               <span>🎓</span> Wisuda
             </li>
             <li
-              class="flex items-center gap-3 hover:text-pink-500 cursor-pointer"
+              onclick="filterProduk('SUCI')"
+              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
+              data-cat="SUCI"
             >
               <span>💍</span> Pernikahan
             </li>
@@ -74,44 +169,13 @@
       </aside>
 
       <section class="w-full md:w-3/4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-            class="group bg-white rounded-3xl p-4 border border-pink-50 shadow-sm hover:shadow-xl transition-all duration-300"
-          >
-            <div
-              class="relative overflow-hidden rounded-2xl bg-pink-50 h-72 mb-4"
-            >
-              <img
-                src="images/PinkRoseBouquet.jpg"
-                class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-              />
-              <span
-                class="absolute top-3 right-3 bg-white/80 p-2 rounded-full text-pink-500"
-                >❤️</span
-              >
-            </div>
-            <div class="text-center">
-              <p
-                class="text-[10px] uppercase tracking-widest text-pink-400 font-bold mb-1"
-              >
-                Romantis
-              </p>
-              <h4 class="font-serif text-lg text-slate-800 mb-2">
-                Pink Rose Bouquet
-              </h4>
-              <div class="flex justify-center items-center gap-2 mb-4">
-                <span class="text-pink-500 font-bold">$ 15.99</span>
-                <span class="text-gray-300 line-through text-sm">$ 18.99</span>
-              </div>
-              <button
-                class="w-full py-3 bg-pink-500 text-white rounded-xl font-bold hover:bg-pink-600 transition shadow-lg shadow-pink-200"
-              >
-                Add to bag
-              </button>
-            </div>
-          </div>
-        </div>
+        <div
+          id="KatalogProduk"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500"
+        ></div>
       </section>
     </main>
+
+    <script src="main.js"></script>
   </body>
 </html>
