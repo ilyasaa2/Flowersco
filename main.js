@@ -3,37 +3,37 @@ const produkList = {
     harga: "$15.99",
     diskon: "$18.99",
     gambar: "images/PinkRoseBouquet.jpg",
-    kategori: "ROMANTIS",
+    kategori: "aniversary",
   },
   "Calla Lily Bouquet": {
     harga: "$15.99",
     diskon: "$19.99",
     gambar: "images/CallaLilyBouquet.jpg",
-    kategori: "MINIMALIS",
+    kategori: "wisuda",
   },
   "Cherry Blossom": {
     harga: "$18.50",
     diskon: "$22.00",
     gambar: "images/CherryBlossom.jpg",
-    kategori: "ELEGAN",
+    kategori: "ulangtahun",
   },
   Lavender: {
     harga: "$12.99",
     diskon: "$15.00",
     gambar: "images/LavenderBouquet.jpg",
-    kategori: "SUCI",
+    kategori: "pernikahan",
   },
   "Sun Flower Box": {
     harga: "$20.00",
     diskon: "$25.00",
     gambar: "images/SunFlower.jpg",
-    kategori: "ELEGAN",
+    kategori: "ulangtahun",
   },
   "White Tulip": {
     harga: "$17.99",
     diskon: "$21.00",
     gambar: "images/WhiteTulip.jpg",
-    kategori: "MINIMALIS",
+    kategori: "wisuda",
   },
 };
 
@@ -384,4 +384,12 @@ function ubahJumlah(index, perubahan) {
 
   simpanDanUpdate();
   tampilkanKeranjang();
+}
+
+////coba
+const params = new URLSearchParams(window.location.search);
+const filter = params.get("filter");
+
+if (filter) {
+  filterProduk(filter);
 }
