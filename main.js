@@ -26,13 +26,8 @@ const produkList = {
   "Sun Flower Box": {
     harga: "$20.00",
     diskon: "$25.00",
-<<<<<<< HEAD
     gambar: "images/SunFlowerBox.jpg",
     kategori: "ELEGAN",
-=======
-    gambar: "images/SunFlower.jpg",
-    kategori: "ulangtahun",
->>>>>>> fa9ae0aee9c86635e45f70059397a7a6dc863d66
   },
   "White Tulip": {
     harga: "$17.99",
