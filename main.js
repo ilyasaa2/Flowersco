@@ -17,7 +17,7 @@ const produkList = {
     gambar: "images/CherryBlossom.jpg",
     kategori: "ELEGAN",
   },
-  Lavender: {
+  "Lavender": {
     harga: "$12.99",
     diskon: "$15.00",
     gambar: "images/LavenderBouquet.jpg",
@@ -26,7 +26,7 @@ const produkList = {
   "Sun Flower Box": {
     harga: "$20.00",
     diskon: "$25.00",
-    gambar: "images/SunFlower.jpg",
+    gambar: "images/SunFlowerBox.jpg",
     kategori: "ELEGAN",
   },
   "White Tulip": {
