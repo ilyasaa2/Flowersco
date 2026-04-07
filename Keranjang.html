@@ -64,23 +64,19 @@
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
       ></div>
 
-      <div
-        id="cart-actions"
-        class="mt-16 flex flex-col items-center gap-4 hidden"
-      >
-        <button
-            id="btn-checkout"
-            onclick="checkoutWhatsApp()" 
-            class="w-full py-4 bg-pink-500 text-white rounded-full font-bold shadow-lg hover:bg-pink-600 transition-all active:scale-95"
-        >
-            Lanjutkan Pembayaran →
-        </button>
-        <button
-          onclick="resetKeranjang()"
-          class="text-slate-400 text-sm hover:text-red-500 transition underline decoration-dotted"
-        >
-          Kosongkan Keranjang
-        </button>
+      <div id="cart-actions" class="mt-16 flex flex-col items-center gap-4 hidden">
+          <div class="w-full flex justify-between items-center px-4 mb-2">
+              <span class="text-slate-500 font-medium">Estimasi Total</span>
+              <span id="total-estimasi" class="text-2xl font-bold text-pink-600">Rp 0</span>
+          </div>
+
+          <button onclick="prosesKePembayaran()" class="w-full py-4 bg-pink-500 text-white rounded-full font-bold shadow-lg hover:bg-pink-600 transition-all active:scale-95">
+              Lanjutkan Pembayaran →
+          </button>
+    
+          <button onclick="resetKeranjang()" class="text-slate-400 text-sm hover:text-red-500 transition underline">
+              Kosongkan Keranjang
+          </button>
       </div>
     </main>
 

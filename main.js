@@ -1,37 +1,31 @@
 const produkList = {
   "Pink Rose Bouquet": {
-    harga: "$15.99",
-    diskon: "$18.99",
+    harga: "Rp 200.000",
+    diskon: "RP 220.000",
     gambar: "images/PinkRoseBouquet.jpg",
-    kategori: "aniversary",
+    kategori: "anniversary",
   },
   "Calla Lily Bouquet": {
-    harga: "$15.99",
-    diskon: "$19.99",
+    harga: "Rp 180.000",
+    diskon: "RP 215.000",
     gambar: "images/CallaLilyBouquet.jpg",
     kategori: "wisuda",
   },
   "Cherry Blossom": {
-    harga: "$18.50",
-    diskon: "$22.00",
+    harga: "Rp 195.000",
+    diskon: "RP 235.000",
     gambar: "images/CherryBlossom.jpg",
-    kategori: "ulangtahun",
+    kategori: "ulang tahun",
   },
   "Lavender": {
-    harga: "$12.99",
-    diskon: "$15.00",
+    harga: "Rp 210.000",
+    diskon: "RP 250.000",
     gambar: "images/LavenderBouquet.jpg",
     kategori: "pernikahan",
   },
-  "Sun Flower Box": {
-    harga: "$20.00",
-    diskon: "$25.00",
-    gambar: "images/SunFlowerBox.jpg",
-    kategori: "ELEGAN",
-  },
   "White Tulip": {
-    harga: "$17.99",
-    diskon: "$21.00",
+    harga: "Rp 170.000",
+    diskon: "RP 200.000",
     gambar: "images/WhiteTulip.jpg",
     kategori: "wisuda",
   },
@@ -46,69 +40,59 @@ document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("KatalogProduk")) {
     const urlParams = new URLSearchParams(window.location.search);
     const filterParam = urlParams.get("filter");
-
-    if (filterParam) {
-      filterProduk(filterParam);
-    } else {
-      renderKatalog("SEMUA");
-    }
+    filterParam ? filterProduk(filterParam) : renderKatalog("SEMUA");
   }
 
-  if (document.getElementById("Keranjang")) tampilkanKeranjang();
+  if (document.getElementById("Keranjang")) renderKeranjang();
   if (document.getElementById("Wishlist-Container")) tampilkanWishlist();
 
   const searchInput = document.getElementById("searchInput");
   if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      renderKatalog("SEMUA", e.target.value.toLowerCase());
-    });
+    searchInput.addEventListener("input", (e) => renderKatalog("SEMUA", e.target.value.toLowerCase()));
   }
+});
 
-  const loginBtn = document.getElementById("loginbtn");
+const loginBtn = document.getElementById("loginbtn");
   if (loginBtn) {
     loginBtn.addEventListener(
       "click",
       () => (window.location.href = "Login.html"),
     );
-  }
-});
+  };
 
 function renderKatalog(filterKategori, searchKeyword = "") {
   const container = document.getElementById("KatalogProduk");
   if (!container) return;
-
   container.innerHTML = "";
 
   Object.keys(produkList).forEach((nama) => {
     const item = produkList[nama];
-    const cocokKategori =
-      filterKategori === "SEMUA" || item.kategori === filterKategori;
+    const cocokKategori = filterKategori === "SEMUA" || item.kategori === filterKategori;
     const cocokSearch = nama.toLowerCase().includes(searchKeyword);
 
     if (cocokKategori && cocokSearch) {
       const isFav = wishlist.includes(nama);
       container.innerHTML += `
-                <div class="group bg-white rounded-[2.5rem] p-4 border border-pink-50 shadow-sm hover:shadow-xl transition-all duration-300">
-                    <div class="relative overflow-hidden rounded-[2rem] bg-pink-50 h-72 mb-4">
-                        <img src="${item.gambar}" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" />
-                        <button onclick="tambahFavorit('${nama}')" class="absolute top-4 right-4 bg-white/90 p-2.5 rounded-full shadow-md hover:scale-110 transition-all ${isFav ? "text-pink-600" : "text-gray-300"}">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="${isFav ? "currentColor" : "none"}" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="text-center px-2">
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-pink-400 font-bold mb-1">${item.kategori}</p>
-                        <h4 class="font-serif text-lg text-slate-800 mb-2 h-12 flex items-center justify-center">${nama}</h4>
-                        <div class="flex justify-center items-center gap-2 mb-4">
-                            <span class="text-pink-600 font-extrabold text-xl">${item.harga}</span>
-                            <span class="text-gray-300 line-through text-xs">${item.diskon}</span>
-                        </div>
-                        <button onclick="tambahKeranjang('${nama}')" class="w-full py-3.5 bg-pink-500 text-white rounded-2xl font-bold hover:bg-pink-600 transition shadow-lg shadow-pink-100 active:scale-95">
-                            Add to bag
-                        </button>
-                    </div>
-                </div>`;
+        <div class="group bg-white rounded-[2.5rem] p-4 border border-pink-50 shadow-sm hover:shadow-xl transition-all duration-300">
+            <div class="relative overflow-hidden rounded-[2rem] bg-pink-50 h-72 mb-4">
+                <img src="${item.gambar}" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" />
+                <button onclick="tambahFavorit('${nama}')" class="absolute top-4 right-4 bg-white/90 p-2.5 rounded-full shadow-md ${isFav ? "text-pink-600" : "text-gray-300"}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="${isFav ? "currentColor" : "none"}" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="text-center px-2">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-pink-400 font-bold mb-1">${item.kategori}</p>
+                <h4 class="font-serif text-lg text-slate-800 mb-2 h-12 flex items-center justify-center">${nama}</h4>
+                <div class="flex justify-center items-center gap-2 mb-4">
+                    <span class="text-pink-600 font-extrabold text-xl">${item.harga}</span>
+                </div>
+                <button onclick="tambahKeranjang('${nama}')" class="w-full py-3.5 bg-pink-500 text-white rounded-2xl font-bold hover:bg-pink-600 transition shadow-lg active:scale-95">
+                    Tambah ke Keranjang
+                </button>
+            </div>
+        </div>`;
     }
   });
 }
@@ -122,49 +106,20 @@ function filterProduk(kategori) {
   renderKatalog(kategori);
 }
 
-function tambahKeranjang(namaProduk) {
-  const detail = produkList[namaProduk];
-  if (detail) {
-    const index = keranjang.findIndex((item) => item.nama === namaProduk);
-    if (index !== -1) {
-      keranjang[index].jumlah += 1;
-    } else {
-      keranjang.push({
-        nama: namaProduk,
-        harga: detail.harga,
-        gambar: detail.gambar,
-        jumlah: 1,
-      });
-    }
-    simpanDanUpdate();
-
-    showNotification(`🛒 ${namaProduk} ditambahkan ke Keranjang!`);
-
-    if (document.getElementById("Keranjang")) tampilkanKeranjang();
-  }
-}
-
-function tampilkanKeranjang() {
-  const kontainer = document.getElementById("Keranjang");
+function renderKeranjang() {
+  const container = document.getElementById("Keranjang");
   const actions = document.getElementById("cart-actions");
-  const totalDisplay = document.getElementById("total-harga");
-  if (totalDisplay) {
-    const totalSemua = keranjang.reduce((acc, item) => {
-      return acc + getHargaAngka(item.harga) * item.jumlah;
-    }, 0);
+  const estimasiEl = document.getElementById("total-estimasi"); // Sesuai ID di gambar kamu sebelumnya
+  
+  keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
 
-    totalDisplay.textContent = `$${totalSemua.toFixed(2)}`;
-  }
-
-  if (!kontainer) return;
-  kontainer.innerHTML = "";
-  let totalJelajah = 0;
+  if (!container) return;
 
   if (keranjang.length === 0) {
     if (actions) actions.classList.add("hidden");
-    kontainer.innerHTML = `
+    container.innerHTML = `
         <div class="col-span-full flex flex-col items-center justify-center py-24 bg-white/40 rounded-[3rem] border-2 border-dashed border-pink-200 animate-fade-in">
-            <div class="text-7xl mb-6">💐</div>
+            <div class="text-7xl mb-6">🛒</div>
             <h2 class="text-2xl font-serif text-slate-800 mb-2">Oops! Keranjangmu masih kosong</h2>
             <p class="text-slate-500 mb-8 text-center max-w-md">
                 Sepertinya kamu belum memilih bunga cantik untuk hari ini. Yuk, intip koleksi terbaru kami!
@@ -173,43 +128,73 @@ function tampilkanKeranjang() {
                 Lihat Koleksi Bunga →
             </a>
         </div>`;
+    if (estimasiEl) estimasiEl.innerText = "Rp 0";
     return;
   }
 
   if (actions) actions.classList.remove("hidden");
+  container.innerHTML = "";
+  let totalHarga = 0;
 
   keranjang.forEach((item, index) => {
-    const hargaSatuan = getHargaAngka(item.harga);
-    const subtotal = hargaSatuan * item.jumlah;
-    totalJelajah += subtotal;
+    const hargaAngka = getHargaAngka(item.harga);
+    const subtotal = hargaAngka * item.jumlah;
+    totalHarga += subtotal;
 
-    kontainer.innerHTML += `
-            <div class="bg-white rounded-[2.5rem] p-5 shadow-sm border border-pink-50 flex flex-col relative group">
-                <div class="relative h-64 overflow-hidden rounded-[1.8rem] mb-4">
-                    <img src="${item.gambar}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" />
-                    <button onclick="hapusItem(${index})" class="absolute top-3 right-3 bg-white/90 p-2 rounded-full text-red-400 shadow-md hover:bg-red-500 hover:text-white transition-all">
-                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-8 4h12m-5 4v6m-4-6v6" /></svg>
-                    </button>
-                </div>
-                
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="font-bold text-lg text-slate-800">${item.nama}</h3>
-                        <p class="text-pink-600 font-bold">$${subtotal.toFixed(2)}</p>
-                    </div>
-                    
-                    <div class="flex items-center gap-3 bg-pink-50 px-3 py-1.5 rounded-full border border-pink-100">
-                        <button onclick="ubahJumlah(${index}, -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded-full shadow-sm text-pink-600 hover:bg-pink-500 hover:text-white transition-all">-</button>
-                        <span class="font-bold text-slate-700 min-w-[20px] text-center">${item.jumlah}</span>
-                        <button onclick="ubahJumlah(${index}, 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded-full shadow-sm text-pink-600 hover:bg-pink-500 hover:text-white transition-all">+</button>
-                    </div>
-                </div>
-            </div>`;
+    container.innerHTML += `
+      <div class="product-card bg-white p-6 rounded-[2.5rem] shadow-sm relative group">
+          <button onclick="hapusItem(${index})" class="absolute top-4 right-4 bg-white/90 p-2 rounded-full text-red-400 shadow-md hover:bg-red-500 hover:text-white transition-all">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-8 4h12m-5 4v6m-4-6v6" /></svg>
+          </button>
+          <div class="overflow-hidden rounded-[1.8rem] mb-4 aspect-square">
+              <img src="${item.gambar}" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-bold text-slate-800">${item.nama}</h3>
+          <p class="text-pink-600 font-bold mb-4">Rp ${subtotal.toLocaleString("id-ID")}</p>
+          
+          <div class="flex items-center justify-between bg-pink-50 px-3 py-1.5 rounded-full border border-pink-100">
+              <div class="flex items-center gap-4 w-full justify-between">
+                  <button onclick="ubahQty(${index}, -1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm text-pink-600 hover:bg-pink-500 hover:text-white transition-all">-</button>
+                  <span class="font-bold text-slate-700">${item.jumlah}</span>
+                  <button onclick="ubahQty(${index}, 1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm text-pink-600 hover:bg-pink-500 hover:text-white transition-all">+</button>
+              </div>
+          </div>
+      </div>`;
   });
 
-  if (totalDisplay) {
-    totalDisplay.textContent = `$${totalJelajah.toFixed(2)}`;
+  if (estimasiEl) {
+    estimasiEl.innerText = `Rp ${totalHarga.toLocaleString("id-ID")}`;
   }
+  localStorage.setItem("totalTagihan", totalHarga);
+}
+
+function resetKeranjang() {
+  if (confirm("Kosongkan keranjang?")) {
+    keranjang = [];
+    simpanDanUpdate();
+    if (document.getElementById("Keranjang")) tampilkanKeranjang();
+  }
+}
+
+function tambahKeranjang(namaProduk) {
+  const detail = produkList[namaProduk];
+  let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+  
+  const index = keranjang.findIndex((item) => item.nama === namaProduk);
+  if (index !== -1) {
+    keranjang[index].jumlah += 1;
+  } else {
+    keranjang.push({
+      nama: namaProduk,
+      harga: detail.harga,
+      gambar: detail.gambar,
+      jumlah: 1,
+    });
+  }
+  
+  localStorage.setItem("keranjang", JSON.stringify(keranjang));
+  updateUI();
+  showNotification(`🛒 ${namaProduk} ditambahkan!`);
 }
 
 function tambahFavorit(namaProduk) {
@@ -269,11 +254,16 @@ function tampilkanWishlist() {
 
   if (wishlist.length === 0) {
     kontainer.innerHTML = `
-            <div class="col-span-full text-center py-20 bg-pink-50 rounded-[3rem] border-2 border-dashed border-pink-200">
-                <span class="text-6xl mb-6 inline-block">💖</span>
-                <p class="text-2xl font-serif italic text-slate-500 mb-2">Wishlist Anda masih kosong</p>
-                <a href="Katalog.html" class="inline-block mt-4 bg-pink-600 text-white px-10 py-3 rounded-full font-bold shadow-lg">Cari Bunga</a>
-            </div>`;
+            <div class="col-span-full flex flex-col items-center justify-center py-24 bg-white/40 rounded-[3rem] border-2 border-dashed border-pink-200 animate-fade-in">
+            <div class="text-7xl mb-6">❤️</div>
+            <h2 class="text-2xl font-serif text-slate-800 mb-2">Wishlist Anda Masih Kosong!</h2>
+            <p class="text-slate-500 mb-8 text-center max-w-md">
+                Sepertinya kamu belum memilih bunga cantik untuk hari ini. Yuk, intip koleksi terbaru kami!
+            </p>
+            <a href="Katalog.html" class="px-10 py-4 bg-pink-500 text-white rounded-full font-bold shadow-lg shadow-pink-200 hover:bg-pink-600 hover:scale-105 transition-all duration-300">
+                Lihat Koleksi Bunga →
+            </a>
+        </div>`;
     return;
   }
 
@@ -301,90 +291,78 @@ function tampilkanWishlist() {
                 </div>`;
     }
   });
-}
-
-function hapusItem(index) {
-  keranjang.splice(index, 1);
-  simpanDanUpdate();
-  tampilkanKeranjang();
-}
+};
 
 function simpanDanUpdate() {
   localStorage.setItem("keranjang", JSON.stringify(keranjang));
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
   updateUI();
-}
+};
 
 function updateUI() {
+  const keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   const cartCount = document.getElementById("cart-count");
   const favCount = document.getElementById("fav-count");
 
   if (cartCount) cartCount.textContent = keranjang.length;
   if (favCount) favCount.textContent = wishlist.length;
-}
-
-function resetKeranjang() {
-  if (confirm("Kosongkan keranjang?")) {
-    keranjang = [];
-    simpanDanUpdate();
-    if (document.getElementById("Keranjang")) tampilkanKeranjang();
-  }
-}
+};
 
 function getHargaAngka(hargaString) {
   if (!hargaString) return 0;
   if (typeof hargaString === "number") return hargaString;
+  return parseInt(hargaString.replace(/[^0-9]/g, "")) || 0;
+};
 
-  const angka = hargaString.replace(/[^0-9.]/g, "");
-  return parseFloat(angka) || 0;
-}
+window.prosesKePembayaran = function() {
+    const keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
 
-function checkoutWhatsApp() {
-  if (keranjang.length === 0) {
-    showNotification("Keranjang Anda masih kosong!");
-    return;
-  }
-
-  const phoneNumber = "6285184709553";
-
-  let pesanWA = " *PESANAN BARU - FLOWERS.CO* \n";
-  pesanWA += "------------------------------------------\n\n";
-  pesanWA += "Halo Admin, saya ingin memesan rangkaian bunga berikut:\n\n";
-
-  let totalHarga = 0;
-
-  keranjang.forEach((item, index) => {
-    const subtotal = getHargaAngka(item.harga) * item.jumlah;
-    pesanWA += `*${index + 1}. ${item.nama}*\n`;
-    pesanWA += `   Jumlah: ${item.jumlah}x\n`;
-    pesanWA += `   Subtotal: $${subtotal.toFixed(2)}\n\n`;
-    totalHarga += subtotal;
-  });
-
-  pesanWA += "------------------------------------------\n";
-  pesanWA += `*TOTAL PEMBAYARAN: $${totalHarga.toFixed(2)}*\n\n`;
-  pesanWA +=
-    "Mohon info ketersediaan stok dan metode pengirimannya. Terima kasih!";
-
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(pesanWA)}`;
-
-  window.open(url, "_blank");
-}
-
-function ubahJumlah(index, perubahan) {
-  keranjang[index].jumlah += perubahan;
-
-  if (keranjang[index].jumlah < 1) {
-    if (confirm(`Hapus ${keranjang[index].nama} dari keranjang?`)) {
-      keranjang.splice(index, 1);
-    } else {
-      keranjang[index].jumlah = 1; // Kembalikan ke 1 jika batal
+    if (keranjang.length === 0) {
+        alert("Keranjang kamu masih kosong, pilih bunga dulu yuk!");
+        window.location.href = "Katalog.html";
+        return;
     }
-  }
 
-  simpanDanUpdate();
-  tampilkanKeranjang();
-}
+    let totalTagihan = 0;
+    keranjang.forEach(item => {
+        const hargaMurni = parseInt(item.harga.toString().replace(/[^0-9]/g, ""));
+        totalTagihan += hargaMurni * item.jumlah;
+    });
+
+    localStorage.setItem("totalTagihan", totalTagihan);
+
+    window.location.href = "Pembayaran.html";
+};
+
+window.resetKeranjang = function() {
+    if (confirm("Apakah anda yakin ingin mengosongkan keranjang?")) {
+        localStorage.removeItem("keranjang");
+        localStorage.removeItem("totalTagihan");
+        location.reload(); 
+    }
+};
+
+window.ubahQty = function(index, delta) {
+  let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+  if (keranjang[index]) {
+    keranjang[index].jumlah += delta;
+    if (keranjang[index].jumlah < 1) {
+      keranjang.splice(index, 1);
+    }
+    localStorage.setItem("keranjang", JSON.stringify(keranjang));
+    renderKeranjang(); 
+    updateUI(); 
+  }
+};
+
+window.hapusItem = function(index) {
+  let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+  keranjang.splice(index, 1);
+  localStorage.setItem("keranjang", JSON.stringify(keranjang));
+  renderKeranjang();
+  updateUI();
+};
 
 ////coba
 const params = new URLSearchParams(window.location.search);
