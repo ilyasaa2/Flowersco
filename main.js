@@ -363,11 +363,3 @@ window.hapusItem = function(index) {
   renderKeranjang();
   updateUI();
 };
-
-////coba
-const params = new URLSearchParams(window.location.search);
-const filter = params.get("filter");
-
-if (filter) {
-  filterProduk(filter);
-}
