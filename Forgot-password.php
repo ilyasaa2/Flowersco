@@ -31,13 +31,13 @@
             <form action="forgot_process.php" method="POST" class="space-y-6" onsubmit="return validateForgot()">
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Email Terdaftar</label>
-                    <input type="email" name="email" id="forgotEmail" placeholder="Masukkan email Anda" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm" required />
+                    <input type="email" name="email" id="forgotEmail" placeholder="Masukkan Email Anda" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm" required />
                     <div id="forgotEmailError" class="text-[10px] text-red-500 mt-1 italic"></div>
                 </div>
 
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Password Baru</label>
-                    <input type="password" name="new_password" id="newPassword" placeholder="Masukkan password baru" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm" required />
+                    <input type="password" name="new_password" id="newPassword" placeholder="Masukkan Password Baru" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm" required />
                 </div>
 
                 <button type="submit" name="reset" class="w-full py-4 bg-[#d63384] text-white rounded-xl font-bold shadow-lg shadow-pink-100 hover:bg-pink-700 transition transform active:scale-95 mt-4">

@@ -64,7 +64,7 @@
                 type="text"
                 name="fullname"
                 id="fullname"
-                placeholder="Masukkan nama lengkap"
+                placeholder="Masukkan Nama Lengkap"
                 class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
                 required
               />
@@ -76,7 +76,7 @@
                 type="email"
                 name="email"
                 id="email"
-                placeholder="Masukkan email Anda"
+                placeholder="Masukkan Email Anda"
                 class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
                 required
               />
@@ -90,7 +90,7 @@
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="Buat password"
+                  placeholder="Buat Password"
                   class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
                   required
                 />
@@ -114,7 +114,7 @@
                 <input
                   type="password"
                   id="confirmPassword"
-                  placeholder="Ulangi password"
+                  placeholder="Ulangi Password"
                   class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
                   required
                 />

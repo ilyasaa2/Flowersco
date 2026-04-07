@@ -38,7 +38,7 @@
                         type="email"
                         id="email"
                         name="email" 
-                        placeholder="Masukkan email Anda"
+                        placeholder="Masukkan Email Anda"
                         class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
                         required
                     />
@@ -55,7 +55,7 @@
                             type="password"
                             id="password"
                             name="password"
-                            placeholder="Masukkan password"
+                            placeholder="Masukkan Password"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
                             required
                         />
