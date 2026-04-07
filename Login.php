@@ -37,85 +37,44 @@
           </p>
         </div>
 
-        <form class="space-y-5">
-          <div>
-            <label
-              class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2"
-              >Email</label
-            >
-            <input
-              type="email"
-              id="email"
-              placeholder="Masukkan email Anda"
-              class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
-            />
-            <div
-              id="emailError"
-              class="text-[10px] text-red-500 mt-1 italic"
-            ></div>
-          </div>
+        <form action="login_process.php" method="POST" class="space-y-5">
+  <div>
+    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email" 
+      placeholder="Masukkan email Anda"
+      class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
+      required
+    />
+  </div>
 
-          <div>
-            <div class="flex justify-between items-center mb-2">
-              <label
-                class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest"
-                >Password</label
-              >
-              <a
-                href="Forgot-password.html"
-                class="text-[10px] text-pink-400 hover:underline"
-                >Lupa Password?</a
-              >
-            </div>
-            <div class="relative">
-              <input
-                type="password"
-                id="password"
-                placeholder="Masukkan password"
-                class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
-              />
-              <button
-                type="button"
-                onclick="togglePasswordUI()"
-                class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-pink-500"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  id="eyeIcon"
-                  class="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div
-              id="passwordError"
-              class="text-[10px] text-red-500 mt-1 italic"
-            ></div>
-          </div>
+  <div>
+    <div class="flex justify-between items-center mb-2">
+      <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest">Password</label>
+      <a href="Forgot-password.html" class="text-[10px] text-pink-400 hover:underline">Lupa Password?</a>
+    </div>
+    <div class="relative">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Masukkan password"
+        class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
+        required
+      />
+      </div>
+  </div>
 
-          <button
-            type="button"
-            onclick="validateForm()"
-            class="w-full py-4 bg-[#d63384] text-white rounded-xl font-bold shadow-lg shadow-pink-100 hover:bg-pink-700 transition transform active:scale-95 mt-4"
-          >
-            Masuk Sekarang
-          </button>
-        </form>
+  <button
+    type="submit"
+    name="login"
+    class="w-full py-4 bg-[#d63384] text-white rounded-xl font-bold shadow-lg shadow-pink-100 hover:bg-pink-700 transition transform active:scale-95 mt-4"
+  >
+    Masuk Sekarang
+  </button>
+</form>
 
         <p class="text-center mt-8 text-xs text-gray-500">
           Belum punya akun?
