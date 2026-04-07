@@ -2,13 +2,13 @@
 include 'config.php';
 
 if (isset($_POST['register'])) {
-    // Mengambil data dan mengamankannya dari SQL Injection
+    // mengambil data dan mengamankannya dari SQL injection
     $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
     $email    = mysqli_real_escape_string($conn, $_POST['email']);
-    // Mengenkripsi password agar tidak terlihat teks aslinya di database
+    // mengenkripsi password di database
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-    // Cek apakah email sudah terdaftar sebelumnya
+    // cek apakah email sudah terdaftar sebelumnya
     $check_email = mysqli_query($conn, "SELECT email FROM users WHERE email = '$email'");
     
     if (mysqli_num_rows($check_email) > 0) {
@@ -17,7 +17,7 @@ if (isset($_POST['register'])) {
                 window.location.href = 'Register.php';
               </script>";
     } else {
-        // Memasukkan data user baru
+        // memasukkan data user baru
         $query = "INSERT INTO users (fullname, email, password) VALUES ('$fullname', '$email', '$password')";
         
         if (mysqli_query($conn, $query)) {

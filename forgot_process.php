@@ -3,10 +3,9 @@ include 'config.php';
 
 if (isset($_POST['reset'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    // Enkripsi password baru
     $new_password = password_hash($_POST['new_password'], PASSWORD_BCRYPT);
 
-    // Cek apakah email ada di database
+    // cek apakah email ada di database
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
     
     if (mysqli_num_rows($query) > 0) {

@@ -86,7 +86,6 @@
     </div>
 
     <script>
-        // Fungsi untuk melihat/sembunyikan password
         function togglePasswordUI() {
             const input = document.getElementById("password");
             const icon = document.getElementById("eyeIcon");
@@ -99,7 +98,7 @@
             }
         }
 
-        // Fungsi validasi sisi klien (sebelum dikirim ke PHP)
+        // fungsi validasi akun dengan PHP
         function validateForm() {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -119,7 +118,7 @@
                 return false;
             }
 
-            return true; // Lanjut ke login_process.php
+            return true; 
         }
     </script>
 </body>

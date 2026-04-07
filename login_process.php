@@ -1,6 +1,6 @@
 <?php
-include 'config.php'; // Menghubungkan ke database
-session_start(); // Memulai sesi untuk menyimpan data login
+include 'config.php'; 
+session_start(); 
 
 if (isset($_POST['login'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -11,7 +11,7 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($query) > 0) {
         $row = mysqli_fetch_assoc($query);
         
-        // Memverifikasi password yang sudah di-hash saat register
+        // memverifikasi password yang sudah di hash saat register
         if (password_verify($password, $row['password'])) {
             $_SESSION['login'] = true;
             $_SESSION['fullname'] = $row['fullname']; // Menyimpan nama user ke sesi
