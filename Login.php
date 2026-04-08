@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="id">
 <head>
@@ -35,14 +36,20 @@
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Email</label>
                     <input
-                        type="email"
+                        type="text"
                         id="email"
                         name="email" 
                         placeholder="Masukkan Email Anda"
                         class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm"
                         required
                     />
-                    <p id="emailError" class="text-[10px] text-red-500 mt-1 italic"></p>
+                    <p id="emailError" class="text-[10px] text-red-500 mt-1 italic">
+                        <?php
+                        if (isset($_GET['error']) && $_GET['error'] == 'email') {
+                            echo "Email tidak terdaftar!";
+                            }
+                            ?>
+                    </p>
                 </div>
 
                 <div>
@@ -66,7 +73,13 @@
                             </svg>
                         </button>
                     </div>
-                    <p id="passwordError" class="text-[10px] text-red-500 mt-1 italic"></p>
+                    <p id="passwordError" class="text-[10px] text-red-500 mt-1 italic">
+                        <?php
+                        if (isset($_GET['error']) && $_GET['error'] == 'password') {
+                            echo "Password salah!";
+                            }
+                            ?>
+                    </p>
                 </div>
 
                 <button
@@ -105,10 +118,10 @@
             const emailError = document.getElementById("emailError");
             const passwordError = document.getElementById("passwordError");
 
-            emailError.innerHTML = "";
-            passwordError.innerHTML = "";
+            if (!emailError.innerHTML) emailError.innerHTML = "";
+            if (!passwordError.innerHTML) passwordError.innerHTML = "";
 
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
                 emailError.innerHTML = "Format email tidak valid!";
                 return false;
             }
