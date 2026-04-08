@@ -65,7 +65,7 @@ $total_estimasi = 0;
                     <?php endwhile; ?>
                 <?php else : ?>
                     <div class="col-span-full text-center py-20">
-                        <p class="text-slate-400 italic">Keranjang belanja Anda masih kosong.</p>
+                        <p class="text-slate-400 italic">Transaksi Anda sedang diproses</p>
                     </div>
                 <?php endif; ?>
             </div>
