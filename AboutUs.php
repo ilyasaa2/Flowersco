@@ -16,16 +16,16 @@
         class="container mx-auto px-6 py-4 flex items-center justify-between"
       >
         <a
-          href="Homepage.html"
+          href="Homepage.php"
           class="text-3xl font-serif text-pink-700 hover:opacity-80 transition-opacity cursor-pointer"
         >
           Flowers.co
         </a>
         <div class="flex items-center gap-8 text-sm font-medium text-slate-700">
-          <a href="Homepage.html" class="hover:text-pink-600">Home</a>
-          <a href="Katalog.html" class="hover:text-pink-600">Catalogue</a>
+          <a href="Homepage.php" class="hover:text-pink-600">Home</a>
+          <a href="Katalog.php" class="hover:text-pink-600">Catalogue</a>
           <a
-            href="AboutUs.html"
+            href="AboutUs.php"
             class="hover:text-pink-600 font-semibold text-pink-700"
             >About Us</a
           >
@@ -59,7 +59,7 @@
             </div>
           </div>
 
-          <a href="Wishlist.html" class="relative group">
+          <a href="Wishlist.php" class="relative group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
@@ -81,7 +81,7 @@
             >
           </a>
 
-          <a href="Keranjang.html" class="relative group">
+          <a href="Keranjang.php" class="relative group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
@@ -278,21 +278,21 @@
           <ul class="space-y-4 text-slate-600 text-sm font-medium">
             <li>
               <a
-                href="Homepage.html"
+                href="Homepage.php"
                 class="hover:text-pink-600 transition-colors"
                 >Beranda</a
               >
             </li>
             <li>
               <a
-                href="Katalog.html"
+                href="Katalog.php"
                 class="hover:text-pink-600 transition-colors"
                 >Katalog</a
               >
             </li>
             <li>
               <a
-                href="AboutUs.html"
+                href="AboutUs.php"
                 class="hover:text-pink-600 transition-colors"
                 >Tentang Kami</a
               >
@@ -308,28 +308,28 @@
           <ul class="space-y-4 text-slate-600 text-sm font-medium">
             <li>
               <a
-                href="Katalog.html?filter=ulang tahun"
+                href="Katalog.php?filter=ulang tahun"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Ulang Tahun</a
               >
             </li>
             <li>
               <a
-                href="Katalog.html?filter=pernikahan"
+                href="Katalog.php?filter=pernikahan"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Pernikahan</a
               >
             </li>
             <li>
               <a
-                href="Katalog.html?filter=anniversary"
+                href="Katalog.php?filter=anniversary"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Anniversary</a
               >
             </li>
             <li>
               <a
-                href="Katalog.html?filter=wisuda"
+                href="Katalog.php?filter=wisuda"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Wisuda</a
               >

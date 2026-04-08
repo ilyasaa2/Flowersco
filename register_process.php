@@ -5,6 +5,15 @@ if (isset($_POST['register'])) {
     // mengambil data dan mengamankannya dari SQL injection
     $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
     $email    = mysqli_real_escape_string($conn, $_POST['email']);
+
+    if (!preg_match("/^[a-zA-Z0-9._%+-]+@gmail\.com$/", $email)) {
+        echo "<script>
+                alert('Format email tidak valid!');
+                window.location.href = 'Register.php';
+              </script>";
+        exit;
+    }
+
     // mengenkripsi password di database
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 

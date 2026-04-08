@@ -27,7 +27,7 @@
   </head>
   <body class="bg-white">
     <header class="border-b">
-      <nav class="bg-white sticky top-0 z-50 shadow">
+      <nav class="bg-white sticky top-0 z-50 bg-white shadow">
         <div
           class="container mx-auto px-6 py-4 flex items-center justify-between"
         >
@@ -37,70 +37,44 @@
           >
             Flowers.co
           </a>
-
           <div
-            class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700"
+            class="flex items-center gap-8 text-sm font-medium text-slate-700"
           >
             <a href="Homepage.html" class="hover:text-pink-600">Home</a>
             <a
-              href="Katalog.php"
+              href="Katalog_view.php"
               class="hover:text-pink-600 font-semibold text-pink-700"
               >Catalogue</a
             >
             <a href="AboutUs.html" class="hover:text-pink-600">About Us</a>
           </div>
-
           <div class="flex items-center gap-6 text-slate-600">
-            <div class="relative group">
-              <button
-                class="flex items-center gap-2 hover:text-pink-600 text-lg py-2 focus:outline-none"
-              >
-                👤
+            <button id="loginbtn" class="hover:text-pink-600 text-lg">
+              👤
+            </button>
+            <button class="relative text-xl">
+              <a href="Wishlist.html" class="relative group">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
                 <span
-                  class="hidden sm:block text-[10px] font-bold uppercase tracking-tighter text-slate-500"
+                  id="fav-count"
+                  class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
+                  >0</span
                 >
-                  <?php echo $_SESSION['username'] ?? 'User'; ?>
-                </span>
-              </button>
-
-              <div
-                class="absolute right-0 w-40 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60]"
-              >
-                <div
-                  class="bg-white border border-pink-100 rounded-2xl shadow-xl overflow-hidden"
-                >
-                  <a
-                    href="logout.php"
-                    class="flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition"
-                  >
-                    <span>➜]</span> Logout Akun
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <a href="Wishlist.html" class="relative group">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-              <span
-                id="fav-count"
-                class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
-                >0</span
-              >
-            </a>
-
+              </a>
+            </button>
             <a href="Keranjang.html" class="relative group">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +139,7 @@
             <li
               onclick="filterProduk('anniversary')"
               class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
-              data-cat="aniversary"
+              data-cat="anniversary"
             >
               <span>💗</span> Anniversary
             </li>
@@ -203,5 +177,39 @@
     </main>
 
     <script src="main.js"></script>
+    <script>
+  async function loadProduk() {
+    try {
+      const response = await fetch("katalog.php");
+      const produk = await response.json();
+
+      const container = document.getElementById("KatalogProduk");
+      container.innerHTML = "";
+
+      produk.forEach((item) => {
+        const card = `
+          <div class="bg-white rounded-2xl shadow p-4">
+            <img src="img/${item.gambar}" class="w-full h-48 object-cover rounded-xl mb-3">
+            <h3 class="font-semibold text-lg">${item.nama_produk}</h3>
+            <p class="text-gray-500 text-sm">${item.kategori}</p>
+            <p class="text-pink-600 font-bold mt-2">Rp ${item.harga}</p>
+            <button 
+              class="mt-3 w-full bg-pink-500 text-white py-2 rounded-xl"
+            >
+              Tambah ke Keranjang
+            </button>
+          </div>
+        `;
+        container.innerHTML += card;
+      });
+
+    } catch (error) {
+      console.error("Gagal load produk:", error);
+    }
+  }
+
+  // jalankan saat halaman dibuka
+  loadProduk();
+</script>
   </body>
 </html>

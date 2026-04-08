@@ -6,6 +6,11 @@ if (isset($_POST['login'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password'];
 
+    if (!preg_match("/^[a-zA-Z0-9._%+-]+@gmail\.com$/", $email)) {
+        echo "<script>alert('Format email tidak valid!'); window.location.href='Login.php';</script>";
+        exit;
+    }
+
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
     
     if (mysqli_num_rows($query) > 0) {
@@ -20,10 +25,12 @@ if (isset($_POST['login'])) {
             header("Location: Homepage.php"); 
             exit;
         } else {
-            echo "<script>alert('Password salah!'); window.location.href='Login.php';</script>";
+            header("Location: Login.php?error=password");
+            exit;
         }
     } else {
-        echo "<script>alert('Email tidak terdaftar!'); window.location.href='Login.php';</script>";
+        header("Location: Login.php?error=email");
+        exit;
     }
 }
 ?>

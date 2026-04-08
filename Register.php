@@ -73,7 +73,7 @@
             <div>
               <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Email</label>
               <input
-                type="email"
+                type="text"
                 name="email"
                 id="email"
                 placeholder="Masukkan Email Anda"
@@ -165,12 +165,33 @@
       }
 
       function validateForm() {
+        const email = document.getElementById("email").value;
+        const emailError = document.getElementById("emailError");
+
         const password = document.getElementById("password").value;
         const confirm = document.getElementById("confirmPassword").value;
         const confirmError = document.getElementById("confirmError");
+        const passwordError = document.getElementById("passwordError");
 
+        // Reset error
+        emailError.innerHTML = "";
         confirmError.innerHTML = "";
+        passwordError.innerHMTL = "";
 
+        // Validasi gmail
+        if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+          emailError.innerHTML = "Format email tidak cocok";
+          return false;
+        }
+
+        // Validasi password
+        if (!/^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}$/.test(password)) {
+          passwordError.innerHTML =
+          "Password minimal 8 karakter, 1 huruf besar dan 1 angka";
+          return false;
+        }
+
+        // Konfirmasi password
         if (password !== confirm) {
           confirmError.innerHTML = "Password tidak cocok!";
           return false;

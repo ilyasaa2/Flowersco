@@ -41,19 +41,19 @@
         class="container mx-auto px-6 py-4 flex items-center justify-between"
       >
         <a
-          href="Homepage.html"
+          href="Homepage.php"
           class="text-3xl font-serif text-pink-700 hover:opacity-80 transition-opacity cursor-pointer"
         >
           Flowers.co
         </a>
         <div class="flex items-center gap-8 text-sm font-medium text-slate-700">
           <a
-            href="Homepage.html"
+            href="Homepage.php"
             class="hover:text-pink-600 font-semibold text-pink-700"
             >Home</a
           >
-          <a href="Katalog.html" class="hover:text-pink-600">Catalogue</a>
-          <a href="AboutUs.html" class="hover:text-pink-600">About Us</a>
+          <a href="Katalog.php" class="hover:text-pink-600">Catalogue</a>
+          <a href="AboutUs.php" class="hover:text-pink-600">About Us</a>
         </div>
         <div class="flex items-center gap-6 text-slate-600">
           <div class="relative group">
@@ -84,7 +84,7 @@
             </div>
           </div>
 
-          <a href="Wishlist.html" class="relative group">
+          <a href="Wishlist.php" class="relative group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
@@ -106,7 +106,7 @@
             >
           </a>
 
-          <a href="Keranjang.html" class="relative group">
+          <a href="Keranjang.php" class="relative group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
@@ -258,7 +258,7 @@
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
           <a
-            href="Katalog.html?filter=ulang tahun"
+            href="Katalog.php?filter=ulang tahun"
             class="group bg-white p-8 rounded-3xl border border-slate-100 text-center space-y-4 hover:shadow-2xl hover:border-pink-100 transition-all cursor-pointer"
           >
             <div
@@ -274,7 +274,7 @@
             </p>
           </a>
           <a
-            href="Katalog.html?filter=pernikahan"
+            href="Katalog.php?filter=pernikahan"
             class="group bg-white p-8 rounded-3xl border border-slate-100 text-center space-y-4 hover:shadow-2xl hover:border-pink-100 transition-all cursor-pointer"
           >
             <div
@@ -290,7 +290,7 @@
             </p>
           </a>
           <a
-            href="Katalog.html?filter=anniversary"
+            href="Katalog.php?filter=anniversary"
             class="group bg-white p-8 rounded-3xl border border-slate-100 text-center space-y-4 hover:shadow-2xl hover:border-pink-100 transition-all cursor-pointer"
           >
             <div
@@ -306,7 +306,7 @@
             </p>
           </a>
           <a
-            href="Katalog.html?filter=wisuda"
+            href="Katalog.php?filter=wisuda"
             class="group bg-white p-8 rounded-3xl border border-slate-100 text-center space-y-4 hover:shadow-2xl hover:border-pink-100 transition-all cursor-pointer"
           >
             <div
@@ -337,7 +337,7 @@
             </p>
           </div>
           <a
-            href="Katalog.html"
+            href="Katalog.php"
             class="text-pink-600 font-bold text-lg flex items-center gap-2 hover:text-pink-700 transition-colors"
           >
             Lihat Semua <span class="text-xl">→</span>
@@ -741,21 +741,21 @@
           <ul class="space-y-4 text-slate-600 text-sm font-medium">
             <li>
               <a
-                href="Homepage.html"
+                href="Homepage.php"
                 class="hover:text-pink-600 transition-colors"
                 >Beranda</a
               >
             </li>
             <li>
               <a
-                href="Katalog.html"
+                href="Katalog.php"
                 class="hover:text-pink-600 transition-colors"
                 >Katalog</a
               >
             </li>
             <li>
               <a
-                href="AboutUs.html"
+                href="AboutUs.php"
                 class="hover:text-pink-600 transition-colors"
                 >Tentang Kami</a
               >
@@ -771,28 +771,28 @@
           <ul class="space-y-4 text-slate-600 text-sm font-medium">
             <li>
               <a
-                href="Katalog.html?filter=ulang tahun"
+                href="Katalog.php?filter=ulang tahun"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Ulang Tahun</a
               >
             </li>
             <li>
               <a
-                href="Katalog.html?filter=pernikahan"
+                href="Katalog.php?filter=pernikahan"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Pernikahan</a
               >
             </li>
             <li>
               <a
-                href="Katalog.html?filter=anniversary"
+                href="Katalog.php?filter=anniversary"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Anniversary</a
               >
             </li>
             <li>
               <a
-                href="Katalog.html?filter=wisuda"
+                href="Katalog.php?filter=wisuda"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Wisuda</a
               >
@@ -820,7 +820,7 @@
       <div
         class="container mx-auto px-6 pt-10 text-center text-slate-400 text-xs font-medium tracking-widest uppercase"
       >
-        © 2026 Flowersco. Seluruh Hak Cipta Dilindungi. Magelang,  Java,
+        © 2026 Flowersco. Seluruh Hak Cipta Dilindungi. Magelang, Central Java,
         Indonesia.
       </div>
     </footer>

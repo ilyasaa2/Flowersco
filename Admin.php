@@ -1,3 +1,14 @@
+<?php
+include 'config.php';
+session_start();
+
+// Ambil data pembayaran yang statusnya masih pending
+$query = mysqli_query($conn, "SELECT pembayaran.*, users.fullname FROM pembayaran 
+                              JOIN users ON pembayaran.user_id = users.id 
+                              WHERE status = 'pending' 
+                              ORDER BY tanggal_bayar DESC");
+?>
+
 <!doctype html>
 <html lang="id">
   <head>
