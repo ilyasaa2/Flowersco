@@ -11,12 +11,13 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($query) > 0) {
         $row = mysqli_fetch_assoc($query);
         
-        // memverifikasi password yang sudah di hash saat register
         if (password_verify($password, $row['password'])) {
-            $_SESSION['login'] = true;
-            $_SESSION['fullname'] = $row['fullname']; // Menyimpan nama user ke sesi
+            // simpan data login ke session
+            $_SESSION['login']   = true;
+            $_SESSION['user_id'] = $row['id'];       
+            $_SESSION['fullname'] = $row['fullname'];
             
-            header("Location: Homepage.html"); 
+            header("Location: Homepage.php"); 
             exit;
         } else {
             echo "<script>alert('Password salah!'); window.location.href='Login.php';</script>";
