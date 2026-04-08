@@ -6,6 +6,7 @@ if (isset($_POST['login'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password'];
 
+    // validasi format email
     if (!preg_match("/^[a-zA-Z0-9._%+-]+@gmail\.com$/", $email)) {
         echo "<script>alert('Format email tidak valid!'); window.location.href='Login.php';</script>";
         exit;
@@ -17,13 +18,18 @@ if (isset($_POST['login'])) {
         $row = mysqli_fetch_assoc($query);
         
         if (password_verify($password, $row['password'])) {
-            // simpan data login ke session
-            $_SESSION['login']   = true;
-            $_SESSION['user_id'] = $row['id'];       
+            $_SESSION['login']    = true;
+            $_SESSION['user_id']  = $row['id'];       
             $_SESSION['fullname'] = $row['fullname'];
-            
-            header("Location: Homepage.php"); 
+            $_SESSION['email']    = $row['email']; 
+
+            if ($email === 'flowerscomgl@gmail.com') {
+                header("Location: admin_dashboard.php");
+            } else {
+                header("Location: Homepage.php"); 
+            }
             exit;
+            
         } else {
             header("Location: Login.php?error=password");
             exit;

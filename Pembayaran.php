@@ -330,7 +330,7 @@
       function copyNumber() {
         const num = document.getElementById("targetNumber").innerText;
         navigator.clipboard.writeText(num);
-        alert("Nomor / Kode Bayar berhasil disalin ke clipboard! ✅");
+        alert("Nomor / Kode Bayar berhasil disalin ke clipboard! ");
       }
       function confirmPayment() {
   const metode = document.getElementById("targetName").innerText;

@@ -1,15 +1,23 @@
-<?php
+<<?php
 include 'config.php';
 session_start();
 
-// Ambil data pembayaran pending
-$query_pembayaran = mysqli_query($conn, "SELECT pembayaran.*, users.fullname FROM pembayaran 
-                              JOIN users ON pembayaran.user_id = users.id 
-                              WHERE status = 'pending' 
-                              ORDER BY tanggal_bayar DESC");
+if (!isset($_SESSION['login']) || $_SESSION['email'] !== 'flowerscomgl@gmail.com') {
+    header("Location: Login.php");
+    exit;
+}
 
-// Ambil data produk dari DATABASE
+$query_pembayaran = mysqli_query($conn, "SELECT pembayaran.*, users.fullname FROM pembayaran 
+                                JOIN users ON pembayaran.user_id = users.id 
+                                WHERE status = 'pending' 
+                                ORDER BY tanggal_bayar DESC");
+
+
 $query_produk = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
+
+if (!$query_produk) {
+    die("Gagal mengambil data produk: " . mysqli_error($conn));
+}
 ?>
 
 <!doctype html>
@@ -160,6 +168,42 @@ $query_produk = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
                         </table>
                     </div>
                 </div>
+
+                <div class="md:w-2/3">
+  <div class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-pink-100/50 border border-pink-50">
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="bg-pink-50/50 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+          <th class="px-6 py-4">Produk</th>
+          <th class="px-6 py-4">Harga</th>
+          <th class="px-6 py-4 text-center">Aksi</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-pink-50">
+    <?php while($row = mysqli_fetch_assoc($query_produk)) : ?>
+    <tr class="hover:bg-pink-50/20 transition">
+        <td class="px-6 py-4 flex items-center gap-4">
+            <img src="img/<?php echo $row['gambar']; ?>" class="w-12 h-12 rounded-lg object-cover shadow-sm">
+            <span class="font-semibold text-slate-700 text-sm"><?php echo $row['nama_produk']; ?></span>
+        </td>
+        <td class="px-6 py-4 text-sm text-pink-600 font-bold">
+            Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?>
+        </td>
+        <td class="px-6 py-4 text-center">
+            <div class="flex justify-center gap-4">
+                <a href="hapus_produk.php?id=<?php echo $row['id']; ?>" 
+                   onclick="return confirm('Yakin ingin menghapus produk ini?')"
+                   class="text-red-500 hover:text-red-700 font-bold text-sm">
+                   Hapus
+                </a>
+            </div>
+        </td>
+    </tr>
+    <?php endwhile; ?>
+</tbody>
+    </table>
+  </div>
+</div>
                     
         
     </main>

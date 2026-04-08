@@ -1,3 +1,13 @@
+<?php
+include 'config.php'; // Pastikan nama file koneksi sesuai
+session_start();
+// Opsional: Cek login
+if (!isset($_SESSION['login'])) {
+    header("Location: Login.php");
+    exit;
+}
+?>
+
 <!doctype html>
 <html lang="id">
   <head>
@@ -385,10 +395,9 @@
                   </p>
                   <p class="font-bold text-2xl text-pink-600">Rp 200.000</p>
                 </div>
-                <button
-                  onclick="tambahKeranjang('Pink Rose Bouquet')"
-                  class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
-                >
+                <button 
+                  onclick="tambahKeranjang('Pink Rose Bouquet')" 
+                  class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
                   Pesan
                 </button>
               </div>
@@ -435,12 +444,11 @@
                   </p>
                   <p class="font-bold text-2xl text-pink-600">Rp 180.000</p>
                 </div>
-                <button
-                  onclick="tambahKeranjang('Calla Lily Bouquet')"
-                  class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
-                >
+                <button 
+                  onclick="tambahKeranjang('Calla Lily Bouquet')" 
+                  class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
                   Pesan
-                </button>
+              </button>
               </div>
             </div>
           </div>
@@ -485,12 +493,11 @@
                   </p>
                   <p class="font-bold text-2xl text-pink-600">Rp 195.000</p>
                 </div>
-                <button
-                  onclick="tambahKeranjang('Cherry Blossom')"
-                  class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
-                >
+                <button 
+                  onclick="tambahKeranjang('Cherry Blossom')" 
+                  class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
                   Pesan
-                </button>
+              </button>
               </div>
             </div>
           </div>
@@ -535,11 +542,10 @@
                   </p>
                   <p class="font-bold text-2xl text-pink-600">Rp 210.000</p>
                 </div>
-                <button
-                  onclick="tambahKeranjang('Lavender')"
-                  class="px-6 py-3 bg-pink-600 text-white rounded-xl text-xs font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200"
-                >
-                  Pesan
+                <button 
+                    onclick="tambahKeranjang('Lavender')" 
+                    class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
+                    Pesan
                 </button>
               </div>
             </div>
@@ -825,5 +831,7 @@
       </div>
     </footer>
     <script src="main.js"></script>
+
+    
   </body>
 </html>

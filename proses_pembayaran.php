@@ -44,8 +44,8 @@ if (mysqli_query($conn, $query)) {
     mysqli_query($conn, "DELETE FROM keranjang WHERE user_id = '$user_id'");
 
     echo "<script>
-            alert('Pembayaran berhasil disimpan!');
-            window.location='admin_dashboard.php';
+            alert('Transaksi sedang diproses!');
+            window.location='Katalog.php';
           </script>";
 } else {
     // Jika query pembayaran gagal, keranjang tidak akan dihapus

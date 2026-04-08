@@ -22,6 +22,6 @@ if (isset($_GET['id'])) {
     }
 } else {
     // Jika diakses tanpa ID, lempar kembali ke dashboard
-    header("Location: Katalog.php");
+    header("Location: admin_dashboard.php");
 }
 ?>

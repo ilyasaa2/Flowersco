@@ -177,55 +177,24 @@ function resetKeranjang() {
 }
 
 function tambahKeranjang(namaProduk) {
-  const detail = produkList[namaProduk];
-  let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
-  
-  const index = keranjang.findIndex((item) => item.nama === namaProduk);
-  if (index !== -1) {
-    keranjang[index].jumlah += 1;
-  } else {
-    keranjang.push({
-      nama: namaProduk,
-      harga: detail.harga,
-      gambar: detail.gambar,
-      jumlah: 1,
+    const detail = produkList[namaProduk];
+    const formData = new FormData();
+    formData.append('tambah_keranjang', true);
+    formData.append('nama_produk', namaProduk);
+    formData.append('harga', detail.harga);
+    formData.append('jumlah', 1);
+    formData.append('gambar', detail.gambar);
+
+    fetch('proses_keranjang.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        if(data.trim() === "Berhasil") {
+            showNotification(`${namaProduk} ditambahkan!`);
+        }
     });
-  }
-  
-  localStorage.setItem("keranjang", JSON.stringify(keranjang));
-  updateUI();
-  showNotification(`🛒 ${namaProduk} ditambahkan!`);
-}
-
-function tambahFavorit(namaProduk) {
-  const index = wishlist.indexOf(namaProduk);
-  let pesan = "";
-
-  const btn = event.currentTarget;
-  btn.classList.add("animate-pop");
-  setTimeout(() => btn.classList.remove("animate-pop"), 400);
-
-  if (index === -1) {
-    wishlist.push(namaProduk);
-    pesan = `💖 ${namaProduk} ditambahkan ke Wishlist!`;
-  } else {
-    wishlist.splice(index, 1);
-    pesan = `💔 ${namaProduk} dihapus dari Wishlist.`;
-  }
-
-  simpanDanUpdate();
-  showNotification(pesan);
-
-  if (document.getElementById("KatalogProduk")) {
-    const activeCat =
-      document.querySelector(".category-active")?.getAttribute("data-cat") ||
-      "SEMUA";
-    renderKatalog(activeCat);
-  }
-
-  if (document.getElementById("Wishlist-Container")) {
-    tampilkanWishlist();
-  }
 }
 
 function showNotification(message) {
@@ -363,3 +332,4 @@ window.hapusItem = function(index) {
   renderKeranjang();
   updateUI();
 };
+
