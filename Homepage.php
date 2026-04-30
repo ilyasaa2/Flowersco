@@ -74,7 +74,7 @@ if (!isset($_SESSION['login'])) {
               <span
                 class="hidden sm:block text-[10px] font-bold uppercase tracking-tighter text-slate-500"
               >
-                <?php echo $_SESSION['username'] ?? 'User'; ?>
+                <?php echo htmlspecialchars($_SESSION['fullname'] ?? 'User'); ?>
               </span>
             </button>
 

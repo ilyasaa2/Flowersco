@@ -47,7 +47,7 @@ $query = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
               <button class="flex items-center gap-2 hover:text-pink-600 text-lg py-2 focus:outline-none">
                 👤
                 <span class="hidden sm:block text-[10px] font-bold uppercase tracking-tighter text-slate-500">
-                  <?php echo $_SESSION['fullname'] ?? 'User'; ?>
+                  <?php echo htmlspecialchars($_SESSION['fullname'] ?? 'User'); ?>
                 </span>
               </button>
               <div class="absolute right-0 w-40 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60]">
@@ -58,6 +58,28 @@ $query = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
                 </div>
               </div>
             </div>
+
+            <a href="Wishlist.php" class="relative group">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
+            <span
+              id="fav-count"
+              class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
+              >0</span
+            >
+          </a>
 
             <a href="Keranjang.php" class="relative group">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -84,6 +106,8 @@ $query = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
             <li class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all category-active">✨ Semua Produk</li>
             <li class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"><span>💗</span> Anniversary</li>
             <li class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"><span>🎂</span> Ulang Tahun</li>
+            <li class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"><span>💒</span> Pernikahan</li>
+            <li class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"><span>🎓</span> Wisuda</li>
           </ul>
         </div>
       </aside>

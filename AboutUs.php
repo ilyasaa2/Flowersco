@@ -1,3 +1,13 @@
+<?php
+include 'config.php'; // Pastikan nama file koneksi sesuai
+session_start();
+// Opsional: Cek login
+if (!isset($_SESSION['login'])) {
+    header("Location: Login.php");
+    exit;
+}
+?>
+
 <!doctype html>
 <html lang="id">
   <head>
@@ -39,7 +49,7 @@
               <span
                 class="hidden sm:block text-[10px] font-bold uppercase tracking-tighter text-slate-500"
               >
-                <?php echo $_SESSION['username'] ?? 'User'; ?>
+                <?php echo htmlspecialchars($_SESSION['fullname'] ?? 'User'); ?>
               </span>
             </button>
 
