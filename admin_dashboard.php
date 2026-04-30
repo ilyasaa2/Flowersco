@@ -123,21 +123,15 @@ if (!$query_produk) {
                                 <tr class="bg-pink-50/50 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                                     <th class="px-6 py-4">Produk</th>
                                     <th class="px-6 py-4">Harga</th>
+                                    <th class="px-6 py-4">Unggulan</th>
                                     <th class="px-6 py-4 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-pink-50">
-                                <?php 
-                                // Kita jalankan query langsung di sini untuk memastikan data segar dari DB
-                                $ambil_produk = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
-                                
-                                if(mysqli_num_rows($ambil_produk) > 0) : 
-                                    while($p = mysqli_fetch_assoc($ambil_produk)) : 
-                                ?>
+                                <?php while($p = mysqli_fetch_assoc($query_produk)) : ?>
                                 <tr class="hover:bg-pink-50/20 transition">
                                     <td class="px-6 py-4 flex items-center gap-4">
                                         <?php 
-                                            // Logika folder gambar: jika kolom gambar hanya berisi nama file
                                             $path_gambar = "img/" . $p['gambar']; 
                                         ?>
                                         <img src="<?= $path_gambar; ?>" class="w-12 h-12 rounded-lg object-cover shadow-sm" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
@@ -147,23 +141,26 @@ if (!$query_produk) {
                                         Rp <?= number_format($p['harga'], 0, ',', '.'); ?>
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        <a href="hapus_produk.php?id=<?= $p['id']; ?>" 
-                                        onclick="return confirm('Hapus produk ini?')" 
-                                        class="text-red-400 hover:text-red-600 transition p-2 inline-block">
-                                        Hapus
+                                        <?php if($p['is_featured'] == 1): ?>
+                                            <span class="bg-green-100 text-green-600 text-xs font-bold px-3 py-1.5 round-full flex items-center gap-1 justify-center">
+                                                Unggulan
+                                                <a href="toggle_featured.php?id=<?= $p['id']; ?>&status=0" class="ml-2 text-green-400 hover:text-red-500 transition" onclick="return confirm('Batalkan status unggulan?')">
+                                                    Batalkan Produk Unggulan
+                                                </a>
+                                            </span>
+                                        <?php else : ?>
+                                            <a href="toggle_featured.php?id=<?= $p['id']; ?>$status=1" class="bg-gray-100 hover:bg-yellow-100 text-gray-500 hover:text-yellow-600 text-xs font-bold px-3 py-1.5 rounded-full transition flex items-center gap-1 justify-center" onclick="return confirm('Jadikan produk ini sebagai unggulan?')">
+                                                Jadikan Unggulan
+                                            </a>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <a href="hapus_produk.php?id=<?= $p['id'] ?>" onclick="return confirm('Hapus produk ini?')" class="text-red-400 hover:text-red-600 transition p-2 inline-block">
+                                            Hapus
                                         </a>
                                     </td>
                                 </tr>
-                                <?php 
-                                    endwhile; 
-                                else : 
-                                ?>
-                                <tr>
-                                    <td colspan="3" class="p-10 text-center text-slate-400 italic">
-                                        Belum ada produk di database.
-                                    </td>
-                                </tr>
-                                <?php endif; ?>
+                                <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>

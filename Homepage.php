@@ -337,222 +337,82 @@ if (!isset($_SESSION['login'])) {
 
     <section id="featured" class="py-24 bg-pink-50/30">
       <div class="container mx-auto px-6">
-        <div class="flex items-end justify-between mb-16">
-          <div class="space-y-2">
-            <h2 class="text-4xl font-serif font-bold text-slate-900">
-              Produk Unggulan
-            </h2>
-            <p class="text-slate-500 text-lg font-medium italic">
-              Koleksi terbaik pilihan kami
-            </p>
-          </div>
-          <a
-            href="Katalog.php"
-            class="text-pink-600 font-bold text-lg flex items-center gap-2 hover:text-pink-700 transition-colors"
-          >
-            Lihat Semua <span class="text-xl">→</span>
-          </a>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div
-            class="bg-white rounded-[2rem] p-5 shadow-xl shadow-pink-100/20 border border-pink-100 group"
-          >
-            <div
-              class="aspect-[3/4] rounded-[1.5rem] overflow-hidden mb-6 relative bg-slate-50"
-            >
-              <img
-                src="images/PinkRoseBouquet.jpg"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Pink Rose Bouquet"
-              />
-              <div class="absolute top-4 right-4">
-                <button
-                  onclick="tambahFavorit('Pink Rose Bouquet')"
-                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all"
-                >
-                  ♡
-                </button>
-              </div>
-            </div>
-            <div class="px-2 pb-2 space-y-4">
-              <div class="space-y-1">
-                <p
-                  class="text-[10px] font-bold text-pink-500 uppercase tracking-widest"
-                >
-                  Romantis
-                </p>
-                <h3 class="font-serif text-xl font-bold text-slate-900">
-                  Pink Rose Bouquet
-                </h3>
-              </div>
-              <div
-                class="flex items-center justify-between pt-2 border-t border-pink-50"
-              >
-                <div>
-                  <p class="text-[10px] text-slate-400 line-through">
-                    Rp 220.000
+          <div class="flex items-end justify-between mb-16">
+              <div class="space-y-2">
+                  <h2 class="text-4xl font-serif font-bold text-slate-900">
+                      Produk Unggulan
+                  </h2>
+                  <p class="text-slate-500 text-lg font-medium italic">
+                      Koleksi terbaik pilihan kami
                   </p>
-                  <p class="font-bold text-2xl text-pink-600">Rp 200.000</p>
-                </div>
-                <button 
-                  onclick="tambahKeranjang('Pink Rose Bouquet')" 
-                  class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
-                  Pesan
-                </button>
               </div>
-            </div>
+              <a href="Katalog.php" class="text-pink-600 font-bold text-lg flex items-center gap-2 hover:text-pink-700 transition-colors">
+                  Lihat Semua <span class="text-xl">→</span>
+              </a>
           </div>
 
-          <div
-            class="bg-white rounded-[2rem] p-5 shadow-xl shadow-pink-100/20 border border-pink-100 group"
-          >
-            <div
-              class="aspect-[3/4] rounded-[1.5rem] overflow-hidden mb-6 relative bg-slate-50"
-            >
-              <img
-                src="images/CallaLilyBouquet.jpg"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Calla Lily Bouquet"
-              />
-              <div class="absolute top-4 right-4">
-                <button
-                  onclick="tambahFavorit('Calla Lily Bouquet')"
-                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all"
-                >
-                  ♡
-                </button>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              <?php
+              //Ambil produk unggulan dari database
+              $query_featured = mysqli_query($conn, "SELECT * FROM produk WHERE is_featured = 1 ORDER BY id DESC LIMIT 4");
+              
+              if (mysqli_num_rows($query_featured) > 0) :
+                  while ($featured = mysqli_fetch_assoc($query_featured)) :
+                      $path_gambar = "img/" . $featured['gambar'];
+              ?>
+              <div class="bg-white rounded-[2rem] p-5 shadow-xl shadow-pink-100/20 border border-pink-100 group">
+                  <div class="aspect-[3/4] rounded-[1.5rem] overflow-hidden mb-6 relative bg-slate-50">
+                      <img src="<?= $path_gambar; ?>" 
+                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          onerror="this.src='https://via.placeholder.com/300?text=No+Image'"
+                          alt="<?= htmlspecialchars($featured['nama_produk']); ?>">
+                      <div class="absolute top-4 right-4">
+                          <button onclick="tambahFavorit('<?= htmlspecialchars($featured['nama_produk']); ?>')" 
+                                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all">
+                              ♡
+                          </button>
+                      </div>
+                  </div>
+                  <div class="px-2 pb-2 space-y-4">
+                      <div class="space-y-1">
+                          <p class="text-[10px] font-bold text-pink-500 uppercase tracking-widest">
+                              Unggulan
+                          </p>
+                          <h3 class="font-serif text-xl font-bold text-slate-900">
+                              <?= htmlspecialchars($featured['nama_produk']); ?>
+                          </h3>
+                      </div>
+                      <div class="flex items-center justify-between pt-2 border-t border-pink-50">
+                          <div>
+                              <p class="font-bold text-2xl text-pink-600">
+                                  Rp <?= number_format($featured['harga'], 0, ',', '.'); ?>
+                              </p>
+                          </div>
+                          
+                          <form action="tambah_keranjang.php" method="POST">
+                              <input type="hidden" name="nama_produk" value="<?= htmlspecialchars($featured['nama_produk']); ?>">
+                              <input type="hidden" name="harga" value="<?= $featured['harga']; ?>">
+                              <input type="hidden" name="gambar" value="<?= $featured['gambar']; ?>">
+                              <input type="hidden" name="jumlah" value="1">
+                              <button type="submit" name="tambah_keranjang" 
+                                      class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
+                                  Pesan
+                              </button>
+                          </form>
+                      </div>
+                  </div>
               </div>
-            </div>
-            <div class="px-2 pb-2 space-y-4">
-              <div class="space-y-1">
-                <p
-                  class="text-[10px] font-bold text-pink-500 uppercase tracking-widest"
-                >
-                  Minimalis
-                </p>
-                <h3 class="font-serif text-xl font-bold text-slate-900">
-                  Calla Lily Bouquet
-                </h3>
+              <?php 
+                  endwhile;
+              else :
+              ?>
+              <div class="col-span-full text-center py-12">
+                  <p class="text-slate-500 italic">Belum ada produk unggulan. Admin dapat menandai produk di dashboard.</p>
               </div>
-              <div
-                class="flex items-center justify-between pt-2 border-t border-pink-50"
-              >
-                <div>
-                  <p class="text-[10px] text-slate-400 line-through">
-                    Rp 200.000
-                  </p>
-                  <p class="font-bold text-2xl text-pink-600">Rp 180.000</p>
-                </div>
-                <button 
-                  onclick="tambahKeranjang('Calla Lily Bouquet')" 
-                  class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
-                  Pesan
-              </button>
-              </div>
-            </div>
+              <?php endif; ?>
           </div>
-
-          <div
-            class="bg-white rounded-[2rem] p-5 shadow-xl shadow-pink-100/20 border border-pink-100 group"
-          >
-            <div
-              class="aspect-[3/4] rounded-[1.5rem] overflow-hidden mb-6 relative bg-slate-50"
-            >
-              <img
-                src="images/CherryBlossom.jpg"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Cherry Blossom"
-              />
-              <div class="absolute top-4 right-4">
-                <button
-                  onclick="tambahFavorit('Cherry Blossom')"
-                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all"
-                >
-                  ♡
-                </button>
-              </div>
-            </div>
-            <div class="px-2 pb-2 space-y-4">
-              <div class="space-y-1">
-                <p
-                  class="text-[10px] font-bold text-pink-500 uppercase tracking-widest"
-                >
-                  Elegan
-                </p>
-                <h3 class="font-serif text-xl font-bold text-slate-900">
-                  Cherry Blossom
-                </h3>
-              </div>
-              <div
-                class="flex items-center justify-between pt-2 border-t border-pink-50"
-              >
-                <div>
-                  <p class="text-[10px] text-slate-400 line-through">
-                    Rp 215.000
-                  </p>
-                  <p class="font-bold text-2xl text-pink-600">Rp 195.000</p>
-                </div>
-                <button 
-                  onclick="tambahKeranjang('Cherry Blossom')" 
-                  class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
-                  Pesan
-              </button>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-white rounded-[2rem] p-5 shadow-xl shadow-pink-100/20 border border-pink-100 group"
-          >
-            <div
-              class="aspect-[3/4] rounded-[1.5rem] overflow-hidden mb-6 relative bg-slate-50"
-            >
-              <img
-                src="images/LavenderBouquet.jpg"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Lavender Bouquet"
-              />
-              <div class="absolute top-4 right-4">
-                <button
-                  onclick="tambahFavorit('Lavender')"
-                  class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all"
-                >
-                  ♡
-                </button>
-              </div>
-            </div>
-            <div class="px-2 pb-2 space-y-4">
-              <div class="space-y-1">
-                <p
-                  class="text-[10px] font-bold text-pink-500 uppercase tracking-widest"
-                >
-                  Suci
-                </p>
-                <h3 class="font-serif text-xl font-bold text-slate-900">
-                  Lavender
-                </h3>
-              </div>
-              <div
-                class="flex items-center justify-between pt-2 border-t border-pink-50"
-              >
-                <div>
-                  <p class="text-[10px] text-slate-400 line-through">
-                    Rp 230.000
-                  </p>
-                  <p class="font-bold text-2xl text-pink-600">Rp 210.000</p>
-                </div>
-                <button 
-                    onclick="tambahKeranjang('Lavender')" 
-                    class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">
-                    Pesan
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-    </section>
+  </section>
 
     <section class="py-24 bg-pink-700 text-white relative overflow-hidden">
       <div class="container mx-auto px-6 relative z-10">

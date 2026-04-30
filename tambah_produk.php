@@ -9,7 +9,8 @@ if (isset($_POST['submit'])) {
     $nama_produk = mysqli_real_escape_string($conn, $_POST['nama_produk']);
     $harga       = $_POST['harga'];
     $stok        = $_POST['stok'];
-    
+    $is_featured = isset($_POST['is_featured']) ? 1 : 0;
+
     // Kelola Upload Gambar
     $nama_file = $_FILES['gambar']['name'];
     $ukuran_file = $_FILES['gambar']['size'];
@@ -48,8 +49,8 @@ if (isset($_POST['submit'])) {
         
         // Masukkan data ke Database
         // Kolom 'id' tidak perlu diisi karena AUTO_INCREMENT
-        $query = "INSERT INTO produk (nama_produk, harga, gambar, stok) 
-                  VALUES ('$nama_produk', '$harga', '$namaFileBaru', '$stok')";
+        $query = "INSERT INTO produk (nama_produk, harga, gambar, stok, is_featured) 
+                  VALUES ('$nama_produk', '$harga', '$namaFileBaru', '$stok', '$is_featured')";
 
         if (mysqli_query($conn, $query)) {
             echo "<script>
