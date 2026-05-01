@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 // Cek apakah ada ID yang dikirim melalui URL
 if (isset($_GET['id'])) {

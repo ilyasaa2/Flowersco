@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 if (!isset($_SESSION['login']) || $_SESSION['email'] !== 'flowerscomgl@gmail.com') {
     header("Location: Login.php");
@@ -149,7 +148,7 @@ if (!$query_produk) {
                                                 </a>
                                             </span>
                                         <?php else : ?>
-                                            <a href="toggle_featured.php?id=<?= $p['id']; ?>$status=1" class="bg-gray-100 hover:bg-yellow-100 text-gray-500 hover:text-yellow-600 text-xs font-bold px-3 py-1.5 rounded-full transition flex items-center gap-1 justify-center" onclick="return confirm('Jadikan produk ini sebagai unggulan?')">
+                                            <a href="toggle_featured.php?id=<?= $p['id']; ?>&status=1" class="bg-gray-100 hover:bg-yellow-100 text-gray-500 hover:text-yellow-600 text-xs font-bold px-3 py-1.5 rounded-full transition flex items-center gap-1 justify-center" onclick="return confirm('Jadikan produk ini sebagai unggulan?')">
                                                 Jadikan Unggulan
                                             </a>
                                         <?php endif; ?>

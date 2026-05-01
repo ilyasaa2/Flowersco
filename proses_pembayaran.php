@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 // Memastikan user sudah login
 if (!isset($_SESSION['login']) || !isset($_SESSION['user_id'])) {

@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 //Mengecek apakah ada admin yang login
 if (!isset($_SESSION['login']) || $_SESSION['email'] !== 'flowerscomgl@gmail.com') {
@@ -10,11 +9,11 @@ if (!isset($_SESSION['login']) || $_SESSION['email'] !== 'flowerscomgl@gmail.com
 
 //Mengambil parameter dari URL
 $id_produk = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$status = isset($_GET['status']) ? (int)$_GET9['status'] : 0;
+$status = isset($_GET['status']) ? (int)$_GET['status'] : 0;
 
-if ($id_produk < 0) {
+if ($id_produk > 0) {
     //Update status unggulan
-    $query = "UPDATE produk SET is_featured = 'status' WHERE id = '$id_produk'";
+    $query = "UPDATE produk SET is_featured = '$status' WHERE id = '$id_produk'";
 
     if (mysqli_query($conn, $query)) {
         if ($status == 1) {

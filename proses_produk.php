@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 // Pastikan hanya admin yang bisa memproses
 if (!isset($_SESSION['login']) || $_SESSION['email'] !== 'admin@gmail.com') {

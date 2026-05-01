@@ -1,6 +1,5 @@
 <?php
 include 'config.php'; 
-session_start(); 
 
 if (isset($_POST['login'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -22,6 +21,7 @@ if (isset($_POST['login'])) {
             $_SESSION['user_id']  = $row['id'];       
             $_SESSION['fullname'] = $row['fullname'];
             $_SESSION['email']    = $row['email']; 
+            $_SESSION['user_agent'] = md5($_SERVER['HTTP_USER_AGENT']);
 
             if ($email === 'flowerscomgl@gmail.com') {
                 header("Location: admin_dashboard.php");

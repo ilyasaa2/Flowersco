@@ -1,6 +1,5 @@
 <?php
 include 'config.php'; // Pastikan nama file koneksi sesuai
-session_start();
 // Opsional: Cek login
 if (!isset($_SESSION['login'])) {
     header("Location: Login.php");

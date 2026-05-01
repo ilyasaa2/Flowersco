@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 // Ambil data produk dari database
 // Kita ambil berdasarkan ID DESC agar produk terbaru muncul di paling atas

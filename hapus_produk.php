@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 // Testing: Jika terlempar ke login terus, coba matikan dulu proteksi email untuk tes
 if (!isset($_SESSION['login'])) {
