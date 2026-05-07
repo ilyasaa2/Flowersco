@@ -15,19 +15,19 @@
       class="sticky top-0 z-50 flex justify-between items-center px-8 py-5 bg-white/80 backdrop-blur-md border-b border-pink-100"
     >
       <a
-        href="Homepage.html"
+        href="Homepage.php"
         class="text-3xl font-serif text-pink-700 hover:opacity-80 transition-opacity cursor-pointer"
       >
         Flowers.co
       </a>
       <div class="flex items-center gap-6">
         <a
-          href="Katalog.html"
+          href="Katalog.php"
           class="text-slate-600 hover:text-pink-600 font-medium transition"
           >Katalog</a
         >
         <a
-          href="Keranjang.html"
+          href="Keranjang.php"
           class="group flex items-center gap-2 text-pink-600 font-semibold hover:text-pink-700 transition"
         >
           <span class="group-hover:-translate-x-1 transition-transform">|</span>
@@ -59,7 +59,7 @@
           Ingin melihat koleksi terbaru kami?
         </p>
         <a
-          href="Katalog.html"
+          href="Katalog.php"
           class="inline-block bg-white border-2 border-pink-200 text-pink-600 px-8 py-3 rounded-full font-bold hover:bg-pink-50 transition-colors"
         >
           Lihat Semua Produk

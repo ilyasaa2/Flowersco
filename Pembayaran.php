@@ -107,7 +107,7 @@
                     this,
                     'Bank Mandiri',
                     '1122-3344-5566',
-                    'Flowers.co Payment',
+                    'Ilyasa Wicaksono',
                   )
                 "
                 class="payment-card bg-white p-6 rounded-3xl shadow-sm flex flex-col items-center"
@@ -252,12 +252,19 @@
               </div>
             </div>
 
+            <form method="POST" action="proses_pembayaran.php">
+            <input type="hidden" name="transaksi_id" value="<?= rand(1000,9999) ?>">
+            <input type="hidden" name="metode" id="metodeInput">
+            <input type="hidden" name="jumlah" id="jumlahInput">
+
             <button
-              onclick="confirmPayment()"
-              class="w-full py-5 bg-[#ec4899] text-white rounded-3xl font-bold shadow-lg shadow-pink-200 hover:bg-pink-600 transition-all hover:-translate-y-1 active:translate-y-0"
-            >
-              Bayar Sekarang
-            </button>
+           type="button"
+            onclick="confirmPayment()"
+            class="w-full py-5 bg-[#ec4899] text-white rounded-3xl font-bold shadow-lg hover:bg-pink-600"
+          >
+          Bayar Sekarang
+        </button>
+</form>
           </div>
         </div>
       </div>
@@ -323,23 +330,25 @@
       function copyNumber() {
         const num = document.getElementById("targetNumber").innerText;
         navigator.clipboard.writeText(num);
-        alert("Nomor / Kode Bayar berhasil disalin ke clipboard! ✅");
+        alert("Nomor / Kode Bayar berhasil disalin ke clipboard! ");
       }
-
       function confirmPayment() {
-        const selectedMethod = document.getElementById("targetName").innerText;
-        if (selectedMethod === "...") {
-          alert("Silahkan pilih metode pembayaran");
-          return;
-        }
+  const metode = document.getElementById("targetName").innerText;
 
-        alert(
-          `Terima kasih! Pesanan diproses menggunakan ${selectedMethod}. Silakan selesaikan pembayaran.`,
-        );
+  if (metode === "...") {
+    alert("Pilih metode pembayaran dulu!");
+    return;
+  }
 
-        localStorage.removeItem("keranjang");
-        window.location.href = "Katalog.html";
-      }
+  const total = document
+    .getElementById("totalPrice")
+    .innerText.replace(/[^0-9]/g, "");
+
+  document.getElementById("metodeInput").value = metode;
+  document.getElementById("jumlahInput").value = total;
+
+  document.forms[0].submit();
+}
     </script>
   </body>
 </html>
