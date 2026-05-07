@@ -595,6 +595,23 @@ if (!isset($_SESSION['login'])) {
                 />
               </svg>
             </a>
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=flowerscomgl@gmail.com"
+              target="_blank"
+              class="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center hover:bg-pink-100 hover:text-pink-600 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
+                />
+              </svg>
+            </a>
           </div>
         </div>
         <div>
@@ -678,7 +695,7 @@ if (!isset($_SESSION['login'])) {
               >
             </li>
             <li class="flex items-center gap-3">📞 +62 856-3455-9998</li>
-            <li class="flex items-center gap-3">✉️ hello@flowersco.com</li>
+            <li class="flex items-center gap-3">✉️ flowerscomgl@gmail.com</li>
           </ul>
         </div>
       </div>

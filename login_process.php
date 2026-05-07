@@ -17,10 +17,16 @@ if (isset($_POST['login'])) {
         $row = mysqli_fetch_assoc($query);
         
         if (password_verify($password, $row['password'])) {
+            //Regenerasi Session ID untuk mencegah session fixation
+            session_regenerate_id(true);
+
+            //Set session data
             $_SESSION['login']    = true;
             $_SESSION['user_id']  = $row['id'];       
             $_SESSION['fullname'] = $row['fullname'];
             $_SESSION['email']    = $row['email']; 
+
+            //Mencegah session dipindah ke browser lain
             $_SESSION['user_agent'] = md5($_SERVER['HTTP_USER_AGENT']);
 
             if ($email === 'flowerscomgl@gmail.com') {

@@ -4,7 +4,7 @@ session_name('FLOWERSCO_SESSION');
 session_start();
 
 //Menghancurkan semua session data
-$_SESSION - array();
+$_SESSION = array();
 
 //Menghapus cookie session
 if (ini_get("session.use_cookies")) {
