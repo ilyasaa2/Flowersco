@@ -65,33 +65,43 @@ if (!isset($_SESSION['login'])) {
           <a href="AboutUs.php" class="hover:text-pink-600">About Us</a>
         </div>
         <div class="flex items-center gap-6 text-slate-600">
-          <div class="relative group">
-            <button
-              class="flex items-center gap-2 hover:text-pink-600 text-lg py-2 focus:outline-none"
-            >
-              👤
-              <span
-                class="hidden sm:block text-[10px] font-bold uppercase tracking-tighter text-slate-500"
+            <div class="relative group">
+              <button
+                class="flex items-center gap-2 hover:text-pink-600 text-lg py-2 focus:outline-none"
               >
-                <?php echo htmlspecialchars($_SESSION['fullname'] ?? 'User'); ?>
-              </span>
-            </button>
-
-            <div
-              class="absolute right-0 w-40 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60]"
-            >
-              <div
-                class="bg-white border border-pink-100 rounded-2xl shadow-xl overflow-hidden"
-              >
-                <a
-                  href="logout.php"
-                  class="flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition"
+                👤
+                <span
+                  class="hidden sm:block text-[10px] font-bold uppercase tracking-tighter text-slate-500"
                 >
-                  <span>➜]</span> Logout Akun
-                </a>
+                  <?php echo htmlspecialchars($_SESSION['fullname'] ?? 'User');
+                  ?>
+                </span>
+              </button>
+              <div
+                class="absolute right-0 w-48 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60]"
+              >
+                <div
+                  class="bg-white border border-pink-100 rounded-2xl shadow-xl overflow-hidden"
+                >
+                  <?php if(isset($_SESSION['email']) && $_SESSION['email'] ===
+                  'flowerscomgl@gmail.com'): ?>
+                  <a
+                    href="admin_dashboard.php"
+                    class="flex items-center gap-3 px-4 py-3 text-sm text-pink-600 hover:bg-pink-50 font-bold transition"
+                  >
+                    <span>⚙️</span> Admin Dashboard
+                  </a>
+                  <?php endif; ?>
+
+                  <a
+                    href="logout.php"
+                    class="flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition"
+                  >
+                    <span>➜</span> Logout Akun
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
 
           <a href="Wishlist.php" class="relative group">
             <svg
