@@ -1,14 +1,11 @@
 <?php
-//Menggunakan session yang sama dengan config.php
 session_name('FLOWERSCO_SESSION');
 session_start();
 
-//Menghancurkan semua session data
 $_SESSION = array();
 
-//Menghapus cookie session
 if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params;
+    $params = session_get_cookie_params(); 
     setcookie(
         session_name(),
         '',
@@ -22,6 +19,7 @@ if (ini_get("session.use_cookies")) {
 
 session_destroy();
 
-header("Location: Login.php");
+// Redirect ke login.php 
+header("Location: login.php"); 
 exit();
 ?>
