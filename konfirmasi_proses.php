@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
         // Jika berhasil, kembali ke dashboard dengan pesan sukses
         echo "<script>
                 alert('Pembayaran berhasil dikonfirmasi!');
-                window.location.href = 'admin_dashboard.php';
+                window.location.href = 'admin_dashboard.php#pembayaran-pending';
               </script>";
     } else {
         // Jika gagal

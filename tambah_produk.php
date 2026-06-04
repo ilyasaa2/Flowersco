@@ -8,6 +8,7 @@ if (isset($_POST['submit'])) {
     // Ambil data dari form dan amankan dari karakter aneh
     $nama_produk = mysqli_real_escape_string($conn, $_POST['nama_produk']);
     $harga       = $_POST['harga'];
+    $kategori    = mysqli_real_escape_string($conn, $_POST['kategori']);
     $stok        = $_POST['stok'];
     $is_featured = isset($_POST['is_featured']) ? 1 : 0;
 
@@ -49,13 +50,13 @@ if (isset($_POST['submit'])) {
         
         // Masukkan data ke Database
         // Kolom 'id' tidak perlu diisi karena AUTO_INCREMENT
-        $query = "INSERT INTO produk (nama_produk, harga, gambar, stok, is_featured) 
-                  VALUES ('$nama_produk', '$harga', '$namaFileBaru', '$stok', '$is_featured')";
+        $query = "INSERT INTO produk (nama_produk, kategori, harga, gambar, stok, is_featured) 
+                  VALUES ('$nama_produk', '$kategori', '$harga', '$namaFileBaru', '$stok', '$is_featured')";
 
         if (mysqli_query($conn, $query)) {
             echo "<script>
                     alert('Produk baru berhasil ditambahkan!');
-                    window.location.href = 'admin_dashboard.php';
+                    window.location.href = 'admin_dashboard.php#daftar-produk';
                   </script>";
         } else {
             echo "Error Database: " . mysqli_error($conn);

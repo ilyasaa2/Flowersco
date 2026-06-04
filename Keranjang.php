@@ -39,13 +39,13 @@ $total_estimasi = 0;
             <p class="text-slate-500">Tinjau rangkaian bunga pilihan anda sebelum check-out</p>
         </header>
 
-        <div id="Keranjang" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="KeranjangList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php if (mysqli_num_rows($query) > 0) : ?>
                 <?php while ($item = mysqli_fetch_assoc($query)) : 
                     $subtotal = $item['harga'] * $item['jumlah'];
                     $total_estimasi += $subtotal;
                 ?>
-                    <div class="glass-card p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+                    <div id="item-<?= $item['id_keranjang']; ?>" class="glass-card p-6 rounded-3xl shadow-sm flex flex-col justify-between">
                         <div>
                             <div class="relative">
                                 <img src="img/<?= $item['gambar']; ?>" class="w-full h-48 object-cover rounded-2xl mb-4" alt="">
@@ -65,10 +65,10 @@ $total_estimasi = 0;
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center gap-3 bg-white rounded-xl border border-pink-100 p-1">
                                     <a href="update_keranjang.php?action=decrease&id=<?= $item['id_keranjang']; ?>" class="w-8 h-8 flex items-center justify-center bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100">-</a>
-                                    <span class="font-bold text-slate-700"><?= $item['jumlah']; ?></span>
+                                    <span id="qty-<?= $item['id_keranjang']; ?>" class="font-bold text-slate-700"><?= $item['jumlah']; ?></span>
                                     <a href="update_keranjang.php?action=increase&id=<?= $item['id_keranjang']; ?>" class="w-8 h-8 flex items-center justify-center bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100">+</a>
                                 </div>
-                                <span class="font-bold text-slate-800">Rp <?= number_format($subtotal, 0, ',', '.'); ?></span>
+                                <span id="subtotal-<?= $item['id_keranjang']; ?>" class="font-bold text-slate-800">Rp <?= number_format($subtotal, 0, ',', '.'); ?></span>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@ $total_estimasi = 0;
 
                 <div class="w-full flex justify-between items-center px-4">
                     <span class="text-slate-500 font-medium">Total Estimasi</span>
-                    <span class="text-2xl font-bold text-pink-600">Rp <?= number_format($total_estimasi, 0, ',', '.'); ?></span>
+                    <span id="total-estimasi-display" class="text-2xl font-bold text-pink-600">Rp <?= number_format($total_estimasi, 0, ',', '.'); ?></span>
                 </div>
 
                 <button type="submit" class="w-full py-4 bg-pink-500 text-white rounded-full font-bold shadow-lg hover:bg-pink-600 transition-all active:scale-95">
@@ -107,5 +107,6 @@ $total_estimasi = 0;
             </form>
         <?php endif; ?>
     </main>
+    <script src="main.js"></script>
 </body>
 </html>

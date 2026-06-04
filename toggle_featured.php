@@ -19,12 +19,12 @@ if ($id_produk > 0) {
         if ($status == 1) {
             echo "<script>
                 alert('Produk berhasil dijadikan produk unggulan');
-                window.location.href = 'admin_dashboard.php';
+                window.location.href = 'admin_dashboard.php#daftar-produk';
             </script>";          
                 } else {
                     echo "<script>
                         alert('Produk dihapus dari produk unggulan');
-                        window.location.href = 'admin_dashboard.php';
+                        window.location.href = 'admin_dashboard.php#daftar-produk';
                     </script>";
         }
     } else {

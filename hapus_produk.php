@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 
     if ($hasil) {
         // Redirect kembali ke dashboard setelah berhasil
-        header("Location: admin_dashboard.php?status=terhapus");
+        header("Location: admin_dashboard.php?status=terhapus#daftar-produk");
     } else {
         echo "Gagal menghapus: " . mysqli_error($conn);
     }

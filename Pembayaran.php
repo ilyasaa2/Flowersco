@@ -301,7 +301,7 @@
 
         if (keranjang.length === 0) {
           alert("Ops! Keranjangmu kosong. Silakan belanja dulu.");
-          window.location.href = "Katalog.html";
+          window.location.href = "Katalog.php";
         }
       });
 

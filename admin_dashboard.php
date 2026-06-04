@@ -58,6 +58,15 @@ if (!$query_produk) {
                             <input type="number" name="harga" required class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm" placeholder="150000" />
                         </div>
                         <div>
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Kategori</label>
+                            <select name="kategori" required class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm">
+                                <option value="Anniversary">Anniversary</option>
+                                <option value="Ulang Tahun">Ulang Tahun</option>
+                                <option value="Pernikahan">Pernikahan</option>
+                                <option value="Wisuda">Wisuda</option>
+                            </select>
+                        </div>
+                        <div>
                             <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Stok</label>
                             <input type="number" name="stok" required class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-pink-200 transition text-sm" placeholder="10" />
                         </div>
@@ -71,7 +80,7 @@ if (!$query_produk) {
             </div>
 
             <div class="lg:col-span-8 space-y-8">
-                <div class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-pink-100/50 border border-pink-50">
+                <div id="pembayaran-pending" class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-pink-100/50 border border-pink-50">
                     <div class="p-6 bg-slate-800 text-white">
                         <h3 class="font-serif italic text-lg">Konfirmasi Pembayaran Pending</h3>
                     </div>
@@ -112,7 +121,7 @@ if (!$query_produk) {
                     </div>
             </div>
 
-                <div class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-pink-100/50 border border-pink-50">
+                <div id="daftar-produk" class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-pink-100/50 border border-pink-50">
                     <div class="p-6 border-b border-pink-50">
                         <h3 class="text-slate-800 font-serif italic text-lg">Daftar Katalog Bunga</h3>
                     </div>
@@ -122,6 +131,7 @@ if (!$query_produk) {
                                 <tr class="bg-pink-50/50 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                                     <th class="px-6 py-4">Produk</th>
                                     <th class="px-6 py-4">Harga</th>
+                                    <th class="px-6 py-4">Kategori</th>
                                     <th class="px-6 py-4">Unggulan</th>
                                     <th class="px-6 py-4 text-center">Aksi</th>
                                 </tr>
@@ -138,6 +148,9 @@ if (!$query_produk) {
                                     </td>
                                     <td class="px-6 py-4 text-sm text-pink-600 font-bold">
                                         Rp <?= number_format($p['harga'], 0, ',', '.'); ?>
+                                    </td>
+                                    <td class="px-6 py-4 text-xs text-slate-500">
+                                        <?= htmlspecialchars($p['kategori']); ?>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <?php if($p['is_featured'] == 1): ?>

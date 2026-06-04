@@ -32,7 +32,7 @@
           class="container mx-auto px-6 py-4 flex items-center justify-between"
         >
           <a
-            href="Homepage.html"
+            href="Homepage.php"
             class="text-3xl font-serif text-pink-700 hover:opacity-80 transition-opacity cursor-pointer"
           >
             Flowers.co
@@ -40,20 +40,20 @@
           <div
             class="flex items-center gap-8 text-sm font-medium text-slate-700"
           >
-            <a href="Homepage.html" class="hover:text-pink-600">Home</a>
+            <a href="Homepage.php" class="hover:text-pink-600">Home</a>
             <a
               href="Katalog_view.php"
               class="hover:text-pink-600 font-semibold text-pink-700"
               >Catalogue</a
             >
-            <a href="AboutUs.html" class="hover:text-pink-600">About Us</a>
+            <a href="AboutUs.php" class="hover:text-pink-600">About Us</a>
           </div>
           <div class="flex items-center gap-6 text-slate-600">
             <button id="loginbtn" class="hover:text-pink-600 text-lg">
               👤
             </button>
             <button class="relative text-xl">
-              <a href="Wishlist.html" class="relative group">
+              <a href="Wishlist.php" class="relative group">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"
@@ -75,7 +75,7 @@
                 >
               </a>
             </button>
-            <a href="Keranjang.html" class="relative group">
+            <a href="Keranjang.php" class="relative group">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition"

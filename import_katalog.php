@@ -17,7 +17,7 @@ foreach ($katalog as $item) {
 
     $query = "INSERT INTO produk (nama_produk, kategori, harga, gambar)
               VALUES ('$nama', '$kategori', '$harga', '$gambar')";
-    mysqli_query($koneksi, $query);
+    mysqli_query($conn, $query);
 }
 
 echo "Data katalog berhasil ditambahkan!";

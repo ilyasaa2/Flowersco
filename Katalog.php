@@ -2,8 +2,15 @@
 include 'config.php';
 
 // Ambil data produk dari database
-// Kita ambil berdasarkan ID DESC agar produk terbaru muncul di paling atas
-$query = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
+$filter = isset($_GET['filter']) ? mysqli_real_escape_string($conn, $_GET['filter']) : '';
+
+if ($filter != '') {
+    // Ambil berdasarkan kategori jika ada filter
+    $query = mysqli_query($conn, "SELECT * FROM produk WHERE kategori = '$filter' ORDER BY id DESC");
+} else {
+    // Jika tidak ada filter, ambil semua produk
+    $query = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
+}
 
 ?>
 
@@ -168,31 +175,21 @@ $query = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
             Kategori
           </h3>
           <ul class="space-y-2 text-gray-500 font-medium">
-            <li
-              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all category-active"
-            >
+            <a href="Katalog.php" class="flex items-center gap-3 p-2 hover:text-pink-500 transition-all <?= ($filter == '') ? 'category-active' : '' ?>">
               ✨ Semua Produk
-            </li>
-            <li
-              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
-            >
+            </a>
+            <a href="Katalog.php?filter=Anniversary" class="flex items-center gap-3 p-2 hover:text-pink-500 transition-all <?= ($filter == 'Anniversary') ? 'category-active' : '' ?>">
               <span>💗</span> Anniversary
-            </li>
-            <li
-              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
-            >
+            </a>
+            <a href="Katalog.php?filter=Ulang Tahun" class="flex items-center gap-3 p-2 hover:text-pink-500 transition-all <?= ($filter == 'Ulang Tahun') ? 'category-active' : '' ?>">
               <span>🎂</span> Ulang Tahun
-            </li>
-            <li
-              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
-            >
+            </a>
+            <a href="Katalog.php?filter=Pernikahan" class="flex items-center gap-3 p-2 hover:text-pink-500 transition-all <?= ($filter == 'Pernikahan') ? 'category-active' : '' ?>">
               <span>💒</span> Pernikahan
-            </li>
-            <li
-              class="flex items-center gap-3 p-2 hover:text-pink-500 cursor-pointer transition-all"
-            >
+            </a>
+            <a href="Katalog.php?filter=Wisuda" class="flex items-center gap-3 p-2 hover:text-pink-500 transition-all <?= ($filter == 'Wisuda') ? 'category-active' : '' ?>">
               <span>🎓</span> Wisuda
-            </li>
+            </a>
           </ul>
         </div>
       </aside>
@@ -217,6 +214,9 @@ $query = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
             </div>
 
             <div class="px-2">
+              <p class="text-[10px] uppercase tracking-[0.2em] text-pink-400 font-bold mb-1">
+                <?php echo htmlspecialchars($row['kategori']); ?>
+              </p>
               <h3 class="font-serif italic text-xl text-slate-800 mb-1">
                 <?php echo $row['nama_produk']; ?>
               </h3>
@@ -224,7 +224,7 @@ $query = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
                 Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?>
               </p>
 
-              <form action="tambah_keranjang.php" method="POST">
+              <form action="proses_keranjang.php" method="POST">
                 <input
                   type="hidden"
                   name="nama_produk"

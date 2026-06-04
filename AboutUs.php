@@ -344,28 +344,28 @@ if (!isset($_SESSION['login'])) {
           <ul class="space-y-4 text-slate-600 text-sm font-medium">
             <li>
               <a
-                href="Katalog.php?filter=ulang tahun"
+                href="Katalog.php?filter=Ulang Tahun"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Ulang Tahun</a
               >
             </li>
             <li>
               <a
-                href="Katalog.php?filter=pernikahan"
+                href="Katalog.php?filter=Pernikahan"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Pernikahan</a
               >
             </li>
             <li>
               <a
-                href="Katalog.php?filter=anniversary"
+                href="Katalog.php?filter=Anniversary"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Anniversary</a
               >
             </li>
             <li>
               <a
-                href="Katalog.php?filter=wisuda"
+                href="Katalog.php?filter=Wisuda"
                 class="hover:text-pink-600 transition-colors"
                 >Buket Wisuda</a
               >

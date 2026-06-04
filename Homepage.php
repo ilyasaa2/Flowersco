@@ -5,6 +5,13 @@ if (!isset($_SESSION['login'])) {
     header("Location: Login.php");
     exit;
 }
+
+// Ambil jumlah produk per kategori dari database
+$query_counts = mysqli_query($conn, "SELECT kategori, COUNT(*) as total FROM produk GROUP BY kategori");
+$cat_counts = [];
+while ($row = mysqli_fetch_assoc($query_counts)) {
+    $cat_counts[$row['kategori']] = $row['total'];
+}
 ?>
 
 <!doctype html>
@@ -277,7 +284,7 @@ if (!isset($_SESSION['login'])) {
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
           <a
-            href="Katalog.php?filter=ulang tahun"
+            href="Katalog.php?filter=Ulang Tahun"
             class="group bg-white p-8 rounded-3xl border border-slate-100 text-center space-y-4 hover:shadow-2xl hover:border-pink-100 transition-all cursor-pointer"
           >
             <div
@@ -289,11 +296,11 @@ if (!isset($_SESSION['login'])) {
             <p
               class="text-sm text-slate-400 font-medium group-hover:text-pink-600 transition-colors"
             >
-              1 Produk
+              <?= $cat_counts['Ulang Tahun'] ?? 0 ?> Produk
             </p>
           </a>
           <a
-            href="Katalog.php?filter=pernikahan"
+            href="Katalog.php?filter=Pernikahan"
             class="group bg-white p-8 rounded-3xl border border-slate-100 text-center space-y-4 hover:shadow-2xl hover:border-pink-100 transition-all cursor-pointer"
           >
             <div
@@ -305,11 +312,11 @@ if (!isset($_SESSION['login'])) {
             <p
               class="text-sm text-slate-400 font-medium group-hover:text-pink-600 transition-colors"
             >
-              1 Produk
+              <?= $cat_counts['Pernikahan'] ?? 0 ?> Produk
             </p>
           </a>
           <a
-            href="Katalog.php?filter=anniversary"
+            href="Katalog.php?filter=Anniversary"
             class="group bg-white p-8 rounded-3xl border border-slate-100 text-center space-y-4 hover:shadow-2xl hover:border-pink-100 transition-all cursor-pointer"
           >
             <div
@@ -321,11 +328,11 @@ if (!isset($_SESSION['login'])) {
             <p
               class="text-sm text-slate-400 font-medium group-hover:text-pink-600 transition-colors"
             >
-              1 Produk
+              <?= $cat_counts['Anniversary'] ?? 0 ?> Produk
             </p>
           </a>
           <a
-            href="Katalog.php?filter=wisuda"
+            href="Katalog.php?filter=Wisuda"
             class="group bg-white p-8 rounded-3xl border border-slate-100 text-center space-y-4 hover:shadow-2xl hover:border-pink-100 transition-all cursor-pointer"
           >
             <div
@@ -337,7 +344,7 @@ if (!isset($_SESSION['login'])) {
             <p
               class="text-sm text-slate-400 font-medium group-hover:text-pink-600 transition-colors"
             >
-              2 Produk
+              <?= $cat_counts['Wisuda'] ?? 0 ?> Produk
             </p>
           </a>
         </div>

@@ -1,110 +1,9 @@
-const produkList = {
-  "Pink Rose Bouquet": {
-    harga: "Rp 200.000",
-    diskon: "RP 220.000",
-    gambar: "images/PinkRoseBouquet.jpg",
-    kategori: "anniversary",
-  },
-  "Calla Lily Bouquet": {
-    harga: "Rp 180.000",
-    diskon: "RP 215.000",
-    gambar: "images/CallaLilyBouquet.jpg",
-    kategori: "wisuda",
-  },
-  "Cherry Blossom": {
-    harga: "Rp 195.000",
-    diskon: "RP 235.000",
-    gambar: "images/CherryBlossom.jpg",
-    kategori: "ulang tahun",
-  },
-  "Lavender": {
-    harga: "Rp 210.000",
-    diskon: "RP 250.000",
-    gambar: "images/LavenderBouquet.jpg",
-    kategori: "pernikahan",
-  },
-  "White Tulip": {
-    harga: "Rp 170.000",
-    diskon: "RP 200.000",
-    gambar: "images/WhiteTulip.jpg",
-    kategori: "wisuda",
-  },
-};
-
-let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
 document.addEventListener("DOMContentLoaded", function () {
   updateUI();
-
-  if (document.getElementById("KatalogProduk")) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const filterParam = urlParams.get("filter");
-    filterParam ? filterProduk(filterParam) : renderKatalog("SEMUA");
-  }
-
-  if (document.getElementById("Keranjang")) renderKeranjang();
   if (document.getElementById("Wishlist-Container")) tampilkanWishlist();
-
-  const searchInput = document.getElementById("searchInput");
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => renderKatalog("SEMUA", e.target.value.toLowerCase()));
-  }
 });
-
-const loginBtn = document.getElementById("loginbtn");
-  if (loginBtn) {
-    loginBtn.addEventListener(
-      "click",
-      () => (window.location.href = "Login.html"),
-    );
-  };
-
-function renderKatalog(filterKategori, searchKeyword = "") {
-  const container = document.getElementById("KatalogProduk");
-  if (!container) return;
-  container.innerHTML = "";
-
-  Object.keys(produkList).forEach((nama) => {
-    const item = produkList[nama];
-    const cocokKategori = filterKategori === "SEMUA" || item.kategori === filterKategori;
-    const cocokSearch = nama.toLowerCase().includes(searchKeyword);
-
-    if (cocokKategori && cocokSearch) {
-      const isFav = wishlist.includes(nama);
-      container.innerHTML += `
-        <div class="group bg-white rounded-[2.5rem] p-4 border border-pink-50 shadow-sm hover:shadow-xl transition-all duration-300">
-            <div class="relative overflow-hidden rounded-[2rem] bg-pink-50 h-72 mb-4">
-                <img src="${item.gambar}" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" />
-                <button onclick="tambahFavorit('${nama}')" class="absolute top-4 right-4 bg-white/90 p-2.5 rounded-full shadow-md ${isFav ? "text-pink-600" : "text-gray-300"}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="${isFav ? "currentColor" : "none"}" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                </button>
-            </div>
-            <div class="text-center px-2">
-                <p class="text-[10px] uppercase tracking-[0.2em] text-pink-400 font-bold mb-1">${item.kategori}</p>
-                <h4 class="font-serif text-lg text-slate-800 mb-2 h-12 flex items-center justify-center">${nama}</h4>
-                <div class="flex justify-center items-center gap-2 mb-4">
-                    <span class="text-pink-600 font-extrabold text-xl">${item.harga}</span>
-                </div>
-                <button onclick="tambahKeranjang('${nama}')" class="w-full py-3.5 bg-pink-500 text-white rounded-2xl font-bold hover:bg-pink-600 transition shadow-lg active:scale-95">
-                    Tambah ke Keranjang
-                </button>
-            </div>
-        </div>`;
-    }
-  });
-}
-
-function filterProduk(kategori) {
-  document.querySelectorAll("#categoryList li").forEach((li) => {
-    li.classList.remove("category-active", "text-pink-600", "font-bold");
-    if (li.getAttribute("data-cat") === kategori)
-      li.classList.add("category-active", "text-pink-600", "font-bold");
-  });
-  renderKatalog(kategori);
-}
 
 function renderKeranjang() {
   const container = document.getElementById("Keranjang");
@@ -124,7 +23,7 @@ function renderKeranjang() {
             <p class="text-slate-500 mb-8 text-center max-w-md">
                 Sepertinya kamu belum memilih bunga cantik untuk hari ini. Yuk, intip koleksi terbaru kami!
             </p>
-            <a href="Katalog.html" class="px-10 py-4 bg-pink-500 text-white rounded-full font-bold shadow-lg shadow-pink-200 hover:bg-pink-600 hover:scale-105 transition-all duration-300">
+            <a href="Katalog.php" class="px-10 py-4 bg-pink-500 text-white rounded-full font-bold shadow-lg shadow-pink-200 hover:bg-pink-600 hover:scale-105 transition-all duration-300">
                 Lihat Koleksi Bunga →
             </a>
         </div>`;
@@ -168,24 +67,15 @@ function renderKeranjang() {
   localStorage.setItem("totalTagihan", totalHarga);
 }
 
-function resetKeranjang() {
-  if (confirm("Kosongkan keranjang?")) {
-    keranjang = [];
-    simpanDanUpdate();
-    if (document.getElementById("Keranjang")) tampilkanKeranjang();
-  }
-}
-
-function tambahKeranjang(namaProduk) {
-    const detail = produkList[namaProduk];
+function tambahKeranjang(namaProduk, harga, gambar) {
     const formData = new FormData();
     formData.append('tambah_keranjang', true);
     formData.append('nama_produk', namaProduk);
-    formData.append('harga', detail.harga);
+    formData.append('harga', harga);
     formData.append('jumlah', 1);
-    formData.append('gambar', detail.gambar);
+    formData.append('gambar', gambar);
 
-    fetch('proses_keranjang.php', {
+    fetch('tambah_keranjang.php', {
         method: 'POST',
         body: formData
     })
@@ -215,6 +105,31 @@ function showNotification(message) {
   }, 3000);
 }
 
+// Fungsi Tambah Favorit (Wishlist)
+window.tambahFavorit = function(nama, gambar = '', harga = '', kategori = '') {
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const index = wishlist.findIndex(item => (typeof item === 'object' ? item.nama === nama : item === nama));
+    
+    if (index === -1) {
+        wishlist.push({ nama, gambar, harga, kategori });
+        showNotification(`${nama} ditambahkan ke wishlist!`);
+    } else {
+        wishlist.splice(index, 1);
+        showNotification(`${nama} dihapus dari wishlist.`);
+    }
+    
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    updateUI();
+
+    // Update warna icon hati jika ada di layar
+    document.querySelectorAll(`button[onclick*="'${nama}'"] svg`).forEach(svg => {
+        const isNowFav = wishlist.some(item => (typeof item === 'object' ? item.nama === nama : item === nama));
+        svg.setAttribute('fill', isNowFav ? 'currentColor' : 'none');
+    });
+
+    if (document.getElementById("Wishlist-Container")) tampilkanWishlist();
+};
+
 function tampilkanWishlist() {
   const kontainer = document.getElementById("Wishlist-Container");
   if (!kontainer) return;
@@ -229,21 +144,21 @@ function tampilkanWishlist() {
             <p class="text-slate-500 mb-8 text-center max-w-md">
                 Sepertinya kamu belum memilih bunga cantik untuk hari ini. Yuk, intip koleksi terbaru kami!
             </p>
-            <a href="Katalog.html" class="px-10 py-4 bg-pink-500 text-white rounded-full font-bold shadow-lg shadow-pink-200 hover:bg-pink-600 hover:scale-105 transition-all duration-300">
+            <a href="Katalog.php" class="px-10 py-4 bg-pink-500 text-white rounded-full font-bold shadow-lg shadow-pink-200 hover:bg-pink-600 hover:scale-105 transition-all duration-300">
                 Lihat Koleksi Bunga →
             </a>
         </div>`;
     return;
   }
 
-  wishlist.forEach((namaProduk) => {
-    const detail = produkList[namaProduk];
-    if (detail) {
+  wishlist.forEach((item) => {
+      // Pastikan data item adalah objek, jika string (data lama) buat objek dummy
+      const detail = typeof item === 'object' ? item : { nama: item, gambar: '', harga: '0', kategori: 'Umum' };
       kontainer.innerHTML += `
                 <div class="group bg-white rounded-[2.5rem] p-4 border border-pink-50 shadow-sm hover:shadow-xl transition-all duration-300">
                     <div class="relative overflow-hidden rounded-[2rem] bg-pink-50 h-72 mb-4">
-                        <img src="${detail.gambar}" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" />
-                        <button onclick="tambahFavorit('${namaProduk}')" class="absolute top-4 right-4 bg-white/90 p-2.5 rounded-full shadow-md text-pink-600 hover:bg-pink-500 hover:text-white transition-all">
+                        <img src="img/${detail.gambar}" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300'"/>
+                        <button onclick="tambahFavorit('${detail.nama}')" class="absolute top-4 right-4 bg-white/90 p-2.5 rounded-full shadow-md text-pink-600 hover:bg-pink-500 hover:text-white transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                             </svg>
@@ -251,14 +166,13 @@ function tampilkanWishlist() {
                     </div>
                     <div class="text-center px-2">
                         <p class="text-[10px] uppercase tracking-[0.2em] text-pink-400 font-bold mb-1">${detail.kategori}</p>
-                        <h4 class="font-serif text-lg text-slate-800 mb-2 h-12 flex items-center justify-center">${namaProduk}</h4>
-                        <p class="text-pink-600 font-extrabold text-xl mb-4">${detail.harga}</p>
-                        <button onclick="tambahKeranjang('${namaProduk}')" class="w-full py-3.5 bg-pink-500 text-white rounded-2xl font-bold hover:bg-pink-600 transition shadow-lg shadow-pink-100 active:scale-95">
+                        <h4 class="font-serif text-lg text-slate-800 mb-2 h-12 flex items-center justify-center">${detail.nama}</h4>
+                        <p class="text-pink-600 font-extrabold text-xl mb-4">Rp ${detail.harga}</p>
+                        <button onclick="tambahKeranjang('${detail.nama}', '${detail.harga}', '${detail.gambar}')" class="w-full py-3.5 bg-pink-500 text-white rounded-2xl font-bold hover:bg-pink-600 transition shadow-lg shadow-pink-100 active:scale-95">
                             Add to bag
                         </button>
                     </div>
                 </div>`;
-    }
   });
 };
 
@@ -269,12 +183,9 @@ function simpanDanUpdate() {
 };
 
 function updateUI() {
-  const keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
   const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  const cartCount = document.getElementById("cart-count");
   const favCount = document.getElementById("fav-count");
 
-  if (cartCount) cartCount.textContent = keranjang.length;
   if (favCount) favCount.textContent = wishlist.length;
 };
 
@@ -289,7 +200,7 @@ window.prosesKePembayaran = function() {
 
     if (keranjang.length === 0) {
         alert("Keranjang kamu masih kosong, pilih bunga dulu yuk!");
-        window.location.href = "Katalog.html";
+        window.location.href = "Katalog.php";
         return;
     }
 
@@ -301,7 +212,7 @@ window.prosesKePembayaran = function() {
 
     localStorage.setItem("totalTagihan", totalTagihan);
 
-    window.location.href = "Pembayaran.html";
+    window.location.href = "Pembayaran.php";
 };
 
 window.resetKeranjang = function() {
@@ -332,4 +243,3 @@ window.hapusItem = function(index) {
   renderKeranjang();
   updateUI();
 };
-

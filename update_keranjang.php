@@ -31,6 +31,6 @@ elseif ($action == 'clear') {
 }
 
 // Redirect balik ke keranjang
-header("Location: keranjang.php");
+header("Location: Keranjang.php#KeranjangList");
 exit;
 ?>
