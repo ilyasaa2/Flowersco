@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!doctype html>
 <html lang="id">
   <head>
@@ -93,7 +94,7 @@
               <span
                 id="cart-count"
                 class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
-                >0</span
+                ><?= $total_keranjang; ?></span
               >
             </a>
           </div>

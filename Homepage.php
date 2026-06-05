@@ -150,7 +150,7 @@ while ($row = mysqli_fetch_assoc($query_counts)) {
             <span
               id="cart-count"
               class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white"
-              >0</span
+              ><?= (int)$total_keranjang; ?></span
             >
           </a>
         </div>
@@ -383,9 +383,11 @@ while ($row = mysqli_fetch_assoc($query_counts)) {
                           onerror="this.src='https://via.placeholder.com/300?text=No+Image'"
                           alt="<?= htmlspecialchars($featured['nama_produk']); ?>">
                       <div class="absolute top-4 right-4">
-                          <button onclick="tambahFavorit('<?= htmlspecialchars($featured['nama_produk']); ?>')" 
+                          <button onclick="tambahFavorit('<?= htmlspecialchars($featured['nama_produk']); ?>', '<?= $featured['gambar']; ?>', '<?= number_format($featured['harga'], 0, ',', '.'); ?>', '<?= htmlspecialchars($featured['kategori']); ?>')" 
                                   class="w-10 h-10 bg-white/80 backdrop-blur-sm text-pink-600 rounded-full flex items-center justify-center hover:bg-white shadow-md transition-all">
-                              ♡
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                              </svg>
                           </button>
                       </div>
                   </div>

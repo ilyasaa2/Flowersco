@@ -1,3 +1,10 @@
+<?php
+include 'config.php';
+if (!isset($_SESSION['login'])) {
+    header("Location: Login.php");
+    exit;
+}
+?>
 <!doctype html>
 <html lang="id">
   <head>
@@ -20,18 +27,45 @@
       >
         Flowers.co
       </a>
-      <div class="flex items-center gap-6">
-        <a
-          href="Katalog.php"
-          class="text-slate-600 hover:text-pink-600 font-medium transition"
-          >Katalog</a
-        >
-        <a
-          href="Keranjang.php"
-          class="group flex items-center gap-2 text-pink-600 font-semibold hover:text-pink-700 transition"
-        >
-          <span class="group-hover:-translate-x-1 transition-transform">|</span>
-          Keranjang
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700">
+        <a href="Homepage.php" class="hover:text-pink-600">Home</a>
+        <a href="Katalog.php" class="hover:text-pink-600">Catalogue</a>
+        <a href="AboutUs.php" class="hover:text-pink-600">About Us</a>
+      </div>
+      <div class="flex items-center gap-6 text-slate-600">
+        <div class="relative group">
+          <button class="flex items-center gap-2 hover:text-pink-600 text-lg py-2 focus:outline-none">
+            👤
+            <span class="hidden sm:block text-[10px] font-bold uppercase tracking-tighter text-slate-500">
+              <?= htmlspecialchars($_SESSION['fullname'] ?? 'User'); ?>
+            </span>
+          </button>
+          <div class="absolute right-0 w-48 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60]">
+            <div class="bg-white border border-pink-100 rounded-2xl shadow-xl overflow-hidden">
+              <?php if(isset($_SESSION['email']) && $_SESSION['email'] === 'flowerscomgl@gmail.com'): ?>
+              <a href="admin_dashboard.php" class="flex items-center gap-3 px-4 py-3 text-sm text-pink-600 hover:bg-pink-50 font-bold transition">
+                <span>⚙️</span> Admin Dashboard
+              </a>
+              <?php endif; ?>
+              <a href="logout.php" class="flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition">
+                <span>➜</span> Logout Akun
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="Wishlist.php" class="relative group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600 transition" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span id="fav-count" class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
+        </a>
+        <a href="Keranjang.php" class="relative group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span id="cart-count" class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
+              <?= (int)$total_keranjang; ?>
+          </span>
         </a>
       </div>
     </nav>

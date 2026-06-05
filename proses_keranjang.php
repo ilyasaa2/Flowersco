@@ -21,6 +21,8 @@ if (isset($_POST['tambah_keranjang'])) {
         $query = "INSERT INTO keranjang (user_id, nama_produk, harga, jumlah, gambar) VALUES ('$user_id', '$nama_produk', '$harga', '$jumlah', '$gambar')";
         mysqli_query($conn, $query);
     }
-    echo "Berhasil";
+    // Mengalihkan ke halaman keranjang setelah berhasil
+    header("Location: Keranjang.php");
+    exit;
 }
 ?>

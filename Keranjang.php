@@ -26,11 +26,50 @@ $total_estimasi = 0;
 </head>
 
 <body class="bg-[#fff5f7] min-h-screen">
-    <nav class="sticky top-0 z-50 flex justify-between items-center px-8 py-5 bg-white/80 backdrop-blur-md border-b border-pink-100">
-        <a href="Homepage.php" class="text-3xl font-serif text-pink-700 hover:opacity-80 transition-opacity">Flowers.co</a>
-        <a href="Katalog.php" class="group flex items-center gap-2 text-pink-600 font-semibold hover:text-pink-700 transition">
-            <span class="group-hover:-translate-x-1 transition-transform">←</span> Kembali Belanja
+    <nav class="bg-white sticky top-0 z-50 shadow">
+      <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="Homepage.php" class="text-3xl font-serif text-pink-700 hover:opacity-80 transition-opacity cursor-pointer">
+          Flowers.co
         </a>
+        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700">
+          <a href="Homepage.php" class="hover:text-pink-600">Home</a>
+          <a href="Katalog.php" class="hover:text-pink-600">Catalogue</a>
+          <a href="AboutUs.php" class="hover:text-pink-600">About Us</a>
+        </div>
+        <div class="flex items-center gap-6 text-slate-600">
+            <div class="relative group">
+              <button class="flex items-center gap-2 hover:text-pink-600 text-lg py-2 focus:outline-none">
+                👤
+                <span class="hidden sm:block text-[10px] font-bold uppercase tracking-tighter text-slate-500">
+                  <?= htmlspecialchars($_SESSION['fullname'] ?? 'User'); ?>
+                </span>
+              </button>
+              <div class="absolute right-0 w-48 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60]">
+                <div class="bg-white border border-pink-100 rounded-2xl shadow-xl overflow-hidden">
+                  <?php if(isset($_SESSION['email']) && $_SESSION['email'] === 'flowerscomgl@gmail.com'): ?>
+                  <a href="admin_dashboard.php" class="flex items-center gap-3 px-4 py-3 text-sm text-pink-600 hover:bg-pink-50 font-bold transition">
+                    <span>⚙️</span> Admin Dashboard
+                  </a>
+                  <?php endif; ?>
+                  <a href="logout.php" class="flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition">
+                    <span>➜</span> Logout Akun
+                  </a>
+                </div>
+              </div>
+            </div>
+          <a href="Wishlist.php" class="relative group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-slate-700 group-hover:text-pink-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span id="fav-count" class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">0</span>
+          </a>
+          <a href="Keranjang.php" class="relative group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+          </a>
+        </div>
+      </div>
     </nav>
 
     <main class="max-w-6xl mx-auto p-8">

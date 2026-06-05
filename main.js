@@ -79,11 +79,10 @@ function tambahKeranjang(namaProduk, harga, gambar) {
         method: 'POST',
         body: formData
     })
-    .then(res => res.text())
-    .then(data => {
-        if(data.trim() === "Berhasil") {
-            showNotification(`${namaProduk} ditambahkan!`);
-        }
+    .then(() => {
+        // Karena Anda ingin pindah ke keranjang setelah menambah,
+        // kita lakukan redirect di sini agar angka navbar terupdate.
+        window.location.href = 'Keranjang.php';
     });
 }
 
@@ -107,7 +106,7 @@ function showNotification(message) {
 
 // Fungsi Tambah Favorit (Wishlist)
 window.tambahFavorit = function(nama, gambar = '', harga = '', kategori = '') {
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     const index = wishlist.findIndex(item => (typeof item === 'object' ? item.nama === nama : item === nama));
     
     if (index === -1) {
@@ -183,10 +182,23 @@ function simpanDanUpdate() {
 };
 
 function updateUI() {
-  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const currentWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   const favCount = document.getElementById("fav-count");
 
-  if (favCount) favCount.textContent = wishlist.length;
+  if (favCount) favCount.textContent = currentWishlist.length;
+
+  // Reset semua ikon hati di tombol produk
+  document.querySelectorAll('button[onclick*="tambahFavorit"] svg').forEach(svg => {
+    svg.setAttribute('fill', 'none');
+  });
+
+  // Beri warna fill pada produk yang ada di wishlist
+  currentWishlist.forEach(item => {
+    const name = typeof item === 'object' ? item.nama : item;
+    document.querySelectorAll(`button[onclick*="'${name}'"] svg`).forEach(svg => {
+      svg.setAttribute('fill', 'currentColor');
+    });
+  });
 };
 
 function getHargaAngka(hargaString) {
