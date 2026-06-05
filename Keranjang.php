@@ -67,6 +67,9 @@ $total_estimasi = 0;
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
+            <span id="cart-count" class="absolute -top-1 -right-2 bg-[#ed4492] text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
+                <?= (int)$total_keranjang; ?>
+            </span>
           </a>
         </div>
       </div>
@@ -88,13 +91,12 @@ $total_estimasi = 0;
                         <div>
                             <div class="relative">
                                 <img src="img/<?= $item['gambar']; ?>" class="w-full h-48 object-cover rounded-2xl mb-4" alt="">
-                                <a href="update_keranjang.php?action=delete&id=<?= $item['id_keranjang']; ?>" 
-                                   onclick="return confirm('Hapus produk ini?')"
+                                <button onclick="if(confirm('Hapus produk ini?')) updateQty('delete', '<?= $item['id_keranjang']; ?>')"
                                    class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition shadow-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
-                                </a>
+                                </button>
                             </div>
                             <h3 class="text-xl font-bold text-slate-800"><?= $item['nama_produk']; ?></h3>
                             <p class="text-pink-600 font-semibold mb-2">Rp <?= number_format($item['harga'], 0, ',', '.'); ?></p>
@@ -103,9 +105,9 @@ $total_estimasi = 0;
                         <div class="mt-4 pt-4 border-t border-pink-50">
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center gap-3 bg-white rounded-xl border border-pink-100 p-1">
-                                    <a href="update_keranjang.php?action=decrease&id=<?= $item['id_keranjang']; ?>" class="w-8 h-8 flex items-center justify-center bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100">-</a>
+                                    <button onclick="updateQty('decrease', '<?= $item['id_keranjang']; ?>')" class="w-8 h-8 flex items-center justify-center bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100">-</button>
                                     <span id="qty-<?= $item['id_keranjang']; ?>" class="font-bold text-slate-700"><?= $item['jumlah']; ?></span>
-                                    <a href="update_keranjang.php?action=increase&id=<?= $item['id_keranjang']; ?>" class="w-8 h-8 flex items-center justify-center bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100">+</a>
+                                    <button onclick="updateQty('increase', '<?= $item['id_keranjang']; ?>')" class="w-8 h-8 flex items-center justify-center bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100">+</button>
                                 </div>
                                 <span id="subtotal-<?= $item['id_keranjang']; ?>" class="font-bold text-slate-800">Rp <?= number_format($subtotal, 0, ',', '.'); ?></span>
                             </div>

@@ -236,7 +236,7 @@ if ($filter != '') {
                 Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?>
               </p>
 
-              <form action="proses_keranjang.php" method="POST">
+              <form onsubmit="event.preventDefault(); tambahKeKeranjang(this)">
                 <input
                   type="hidden"
                   name="nama_produk"

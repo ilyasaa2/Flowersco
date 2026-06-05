@@ -2,6 +2,10 @@
 include 'config.php';
 
 if (!isset($_SESSION['login'])) {
+    if (isset($_POST['ajax'])) {
+        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+        exit;
+    }
     http_response_code(401);
     exit;
 }
@@ -21,6 +25,14 @@ if (isset($_POST['tambah_keranjang'])) {
         $query = "INSERT INTO keranjang (user_id, nama_produk, harga, jumlah, gambar) VALUES ('$user_id', '$nama_produk', '$harga', '$jumlah', '$gambar')";
         mysqli_query($conn, $query);
     }
+
+    if (isset($_POST['ajax'])) {
+        $q_total = mysqli_query($conn, "SELECT SUM(jumlah) as total FROM keranjang WHERE user_id = '$user_id'");
+        $d_total = mysqli_fetch_assoc($q_total);
+        echo json_encode(['success' => true, 'total' => (int)$d_total['total']]);
+        exit;
+    }
+
     // Mengalihkan ke halaman keranjang setelah berhasil
     header("Location: Keranjang.php");
     exit;

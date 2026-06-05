@@ -79,10 +79,52 @@ function tambahKeranjang(namaProduk, harga, gambar) {
         method: 'POST',
         body: formData
     })
-    .then(() => {
-        // Karena Anda ingin pindah ke keranjang setelah menambah,
-        // kita lakukan redirect di sini agar angka navbar terupdate.
-        window.location.href = 'Keranjang.php';
+    .then(res => res.text())
+    .then(data => {
+        showNotification(`${namaProduk} ditambahkan!`);
+        // Refresh angka badge di navbar saja
+        location.reload(); 
+    });
+}
+
+window.updateQty = function(action, id) {
+    fetch(`update_keranjang.php?ajax=1&action=${action}&id=${id}`)
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            const itemCard = document.getElementById(`item-${id}`);
+            if (action === 'delete' || (action === 'decrease' && data.new_qty === 0)) {
+                if(itemCard) itemCard.remove();
+                if (data.total_qty === 0) location.reload(); 
+            } else {
+                const qtyEl = document.getElementById(`qty-${id}`);
+                const subEl = document.getElementById(`subtotal-${id}`);
+                if (qtyEl) qtyEl.textContent = data.new_qty;
+                if (subEl) subEl.textContent = 'Rp ' + data.new_subtotal.toLocaleString('id-ID');
+            }
+            
+            const totalDisplay = document.getElementById('total-estimasi-display');
+            if (totalDisplay) totalDisplay.textContent = 'Rp ' + data.grand_total.toLocaleString('id-ID');
+            
+            const badge = document.getElementById('cart-count');
+            if (badge) badge.textContent = data.total_qty;
+        }
+    });
+}
+
+window.tambahKeKeranjang = function(form) {
+    const formData = new FormData(form);
+    formData.append('tambah_keranjang', true);
+    formData.append('ajax', true);
+
+    fetch('proses_keranjang.php', { method: 'POST', body: formData })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            const badge = document.getElementById('cart-count');
+            if (badge) badge.textContent = data.total;
+            showNotification("Berhasil ditambahkan ke keranjang!");
+        }
     });
 }
 
