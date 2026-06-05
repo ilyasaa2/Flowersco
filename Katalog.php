@@ -269,21 +269,37 @@ if ($filter != '') {
     </main>
 
     <script>
-      document
-        .getElementById("searchInput")
-        .addEventListener("keyup", function () {
-          let filter = this.value.toLowerCase();
-          let cards = document.querySelectorAll("#KatalogProduk > div");
+      document.getElementById("searchInput").addEventListener("input", function () {
+        let searchValue = this.value.toLowerCase().trim();
+        let cards = document.querySelectorAll("#KatalogProduk > div:not(#no-results)");
+        let hasResults = false;
 
-          cards.forEach((card) => {
-            let name = card.querySelector("h3").innerText.toLowerCase();
-            if (name.includes(filter)) {
-              card.style.display = "";
-            } else {
-              card.style.display = "none";
-            }
-          });
+        cards.forEach((card) => {
+          // Mencari teks di dalam tag h3 (nama produk)
+          let productName = card.querySelector("h3").textContent.toLowerCase();
+          
+          if (productName.includes(searchValue)) {
+            card.style.display = "block";
+            hasResults = true;
+          } else {
+            card.style.display = "none";
+          }
         });
+
+        // Tampilkan pesan jika tidak ada produk yang cocok dengan pencarian
+        let container = document.getElementById("KatalogProduk");
+        let noResultsMsg = document.getElementById("no-results");
+
+        if (!hasResults && searchValue !== "") {
+          if (!noResultsMsg) {
+            container.insertAdjacentHTML('beforeend', 
+              `<div id="no-results" class="col-span-full text-center py-20 text-slate-400 italic">Produk "${this.value}" tidak ditemukan.</div>`
+            );
+          }
+        } else if (noResultsMsg) {
+          noResultsMsg.remove();
+        }
+      });
     </script>
     <script src="main.js"></script>
   </body>
