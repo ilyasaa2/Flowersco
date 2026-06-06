@@ -7,9 +7,10 @@ if (isset($_POST['submit'])) {
     
     // Ambil data dari form dan amankan dari karakter aneh
     $nama_produk = mysqli_real_escape_string($conn, $_POST['nama_produk']);
-    $harga       = $_POST['harga'];
+    // Bersihkan harga dan stok agar hanya berisi angka murni
+    $harga       = (int)preg_replace('/[^0-9]/', '', $_POST['harga']);
     $kategori    = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $stok        = $_POST['stok'];
+    $stok        = (int)preg_replace('/[^0-9]/', '', $_POST['stok']);
     $is_featured = isset($_POST['is_featured']) ? 1 : 0;
 
     // Kelola Upload Gambar

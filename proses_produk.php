@@ -10,7 +10,8 @@ if (!isset($_SESSION['login']) || $_SESSION['email'] !== 'flowerscomgl@gmail.com
 if (isset($_POST['simpan'])) {
     $id = $_POST['id']; // Jika ada ID, berarti sedang EDIT. Jika kosong, berarti TAMBAH.
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-    $harga = $_POST['harga'];
+    // Pastikan harga yang masuk ke database adalah angka murni tanpa titik/koma
+    $harga = (int)preg_replace('/[^0-9]/', '', $_POST['harga']);
     $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
     $stok = (int)$_POST['stok'];
     

@@ -71,7 +71,7 @@ function tambahKeranjang(namaProduk, harga, gambar) {
     const formData = new FormData();
     formData.append('tambah_keranjang', true);
     formData.append('nama_produk', namaProduk);
-    formData.append('harga', harga);
+    formData.append('harga', getHargaAngka(harga));
     formData.append('jumlah', 1);
     formData.append('gambar', gambar);
 
@@ -212,7 +212,7 @@ function tampilkanWishlist() {
                     <div class="text-center px-2">
                         <p class="text-[10px] uppercase tracking-[0.2em] text-pink-400 font-bold mb-1">${detail.kategori}</p>
                         <h4 class="font-serif text-lg text-slate-800 mb-2 h-12 flex items-center justify-center">${detail.nama}</h4>
-                        <p class="text-pink-600 font-extrabold text-xl mb-4">Rp ${detail.harga}</p>
+                        <p class="text-pink-600 font-extrabold text-xl mb-4">Rp ${getHargaAngka(detail.harga).toLocaleString("id-ID")}</p>
                         <button onclick="tambahKeranjang('${detail.nama}', '${detail.harga}', '${detail.gambar}')" class="w-full py-3.5 bg-pink-500 text-white rounded-2xl font-bold hover:bg-pink-600 transition shadow-lg shadow-pink-100 active:scale-95">
                             Add to bag
                         </button>

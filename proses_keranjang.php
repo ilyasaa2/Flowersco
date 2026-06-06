@@ -13,7 +13,9 @@ if (!isset($_SESSION['login'])) {
 if (isset($_POST['tambah_keranjang'])) {
     $user_id = $_SESSION['user_id'];
     $nama_produk = mysqli_real_escape_string($conn, $_POST['nama_produk']);
-    $harga = (int)$_POST['harga'];
+    
+    // Membersihkan harga dari karakter selain angka sebelum dikonversi ke integer
+    $harga = (int)preg_replace('/[^0-9]/', '', $_POST['harga']);
     $jumlah = (int)$_POST['jumlah'];
     $gambar = basename($_POST['gambar']); 
 
