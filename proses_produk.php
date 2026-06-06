@@ -12,6 +12,7 @@ if (isset($_POST['simpan'])) {
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $harga = $_POST['harga'];
     $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
+    $stok = (int)$_POST['stok'];
     
     // Logika Upload Gambar
     $nama_gambar = $_FILES['gambar']['name'];
@@ -20,16 +21,16 @@ if (isset($_POST['simpan'])) {
     if ($id == "") { 
         // --- LOGIKA TAMBAH PRODUK BARU ---
         move_uploaded_file($tmp_name, 'img/' . $nama_gambar);
-        $query = "INSERT INTO produk (nama_produk, kategori, harga, gambar) VALUES ('$nama', '$kategori', '$harga', '$nama_gambar')";
+        $query = "INSERT INTO produk (nama_produk, kategori, harga, gambar, stok) VALUES ('$nama', '$kategori', '$harga', '$nama_gambar', '$stok')";
     } else {
         // --- LOGIKA EDIT PRODUK ---
         if ($nama_gambar != "") {
             // Jika admin mengunggah gambar baru
             move_uploaded_file($tmp_name, 'img/' . $nama_gambar);
-            $query = "UPDATE produk SET nama_produk='$nama', kategori='$kategori', harga='$harga', gambar='$nama_gambar' WHERE id='$id'";
+            $query = "UPDATE produk SET nama_produk='$nama', kategori='$kategori', harga='$harga', gambar='$nama_gambar', stok='$stok' WHERE id='$id'";
         } else {
             // Jika admin tidak mengganti gambar (pakai gambar lama)
-            $query = "UPDATE produk SET nama_produk='$nama', kategori='$kategori', harga='$harga' WHERE id='$id'";
+            $query = "UPDATE produk SET nama_produk='$nama', kategori='$kategori', harga='$harga', stok='$stok' WHERE id='$id'";
         }
     }
 

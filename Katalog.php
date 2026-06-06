@@ -235,6 +235,9 @@ if ($filter != '') {
               <p class="text-pink-600 font-bold text-lg mb-4">
                 Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?>
               </p>
+              <p class="text-[11px] text-slate-400 font-medium mb-4">
+                Stok tersedia: <span class="<?= $row['stok'] > 0 ? 'text-green-500' : 'text-red-500' ?>"><?= $row['stok']; ?></span>
+              </p>
 
               <form onsubmit="event.preventDefault(); tambahKeKeranjang(this)">
                 <input
@@ -256,9 +259,10 @@ if ($filter != '') {
                 <button
                   type="submit"
                   name="tambah_keranjang"
-                  class="w-full py-3 bg-pink-50 text-pink-600 rounded-2xl font-bold hover:bg-pink-500 hover:text-white transition-all transform active:scale-95 shadow-sm"
+                  class="w-full py-3 <?= $row['stok'] > 0 ? 'bg-pink-50 text-pink-600 hover:bg-pink-500 hover:text-white' : 'bg-gray-100 text-gray-400 cursor-not-allowed' ?> rounded-2xl font-bold transition-all transform <?= $row['stok'] > 0 ? 'active:scale-95' : '' ?> shadow-sm"
+                  <?= $row['stok'] <= 0 ? 'disabled' : '' ?>
                 >
-                  + Keranjang
+                  <?= $row['stok'] > 0 ? '+ Keranjang' : 'Stok Habis' ?>
                 </button>
               </form>
             </div>

@@ -108,6 +108,8 @@ window.updateQty = function(action, id) {
             
             const badge = document.getElementById('cart-count');
             if (badge) badge.textContent = data.total_qty;
+        } else if (data.message) {
+            alert(data.message);
         }
     });
 }
@@ -124,6 +126,8 @@ window.tambahKeKeranjang = function(form) {
             const badge = document.getElementById('cart-count');
             if (badge) badge.textContent = data.total;
             showNotification("Berhasil ditambahkan ke keranjang!");
+        } else {
+            alert(data.message || "Gagal menambahkan produk.");
         }
     });
 }

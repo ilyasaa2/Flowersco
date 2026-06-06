@@ -18,8 +18,23 @@ $user_id = $_SESSION['user_id'];
 $id = mysqli_real_escape_string($conn, $id);
 
 if ($action == 'increase') {
-    // Tambah jumlah menggunakan id_keranjang
-    mysqli_query($conn, "UPDATE keranjang SET jumlah = jumlah + 1 WHERE id_keranjang = '$id' AND user_id = '$user_id'");
+    // Cek stok sebelum menambah
+    $q_val = mysqli_query($conn, "SELECT k.jumlah, p.stok FROM keranjang k 
+                                  JOIN produk p ON k.nama_produk = p.nama_produk 
+                                  WHERE k.id_keranjang = '$id' AND k.user_id = '$user_id'");
+    $data_val = mysqli_fetch_assoc($q_val);
+
+    if ($data_val && $data_val['jumlah'] < $data_val['stok']) {
+        mysqli_query($conn, "UPDATE keranjang SET jumlah = jumlah + 1 WHERE id_keranjang = '$id' AND user_id = '$user_id'");
+    } else {
+        if (isset($_GET['ajax'])) {
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Jumlah Stok telah mencapai batas maksimum (' . ($data_val['stok'] ?? 0) . ')'
+            ]);
+            exit;
+        }
+    }
 } 
 elseif ($action == 'decrease') {
     // Kurangi jumlah, minimal 1
