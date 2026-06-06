@@ -167,6 +167,10 @@ if (!$query_produk) {
                                         <?php endif; ?>
                                     </td>
                                     <td class="px-6 py-4 text-center">
+                                        <a href="edit_produk.php?id=<?= $p['id']; ?>" class="text-blue-500 hover:text-blue-700 transition font-bold text-xs uppercase mr-2">
+                                            Edit
+                                        </a>
+                                        <span class="text-gray-300">|</span>
                                         <a href="hapus_produk.php?id=<?= $p['id'] ?>" onclick="return confirm('Hapus produk ini?')" class="text-red-400 hover:text-red-600 transition p-2 inline-block">
                                             Hapus
                                         </a>

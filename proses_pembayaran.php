@@ -24,10 +24,15 @@ if (mysqli_num_rows($keranjang_query) == 0) {
 $total_bayar = 0;
 $biaya_admin = 2500;
 
+// Simpan item keranjang ke array untuk proses pengurangan stok nanti
+$items_to_process = [];
 while($item = mysqli_fetch_assoc($keranjang_query)) {
     $harga_produk = (int)$item['harga'];
     $jumlah       = (int)$item['jumlah'];
+    $nama_produk  = $item['nama_produk'];
+    
     $total_bayar += $harga_produk * $jumlah;
+    $items_to_process[] = ['nama' => $nama_produk, 'qty' => $jumlah];
 }
 
 $total_bayar += $biaya_admin;
@@ -39,6 +44,13 @@ $query = "INSERT INTO pembayaran
           ('$user_id', '$metode_pembayaran', $total_bayar, 'pending')";
 
 if (mysqli_query($conn, $query)) {
+    // KURANGI STOK PRODUK DI DATABASE
+    foreach ($items_to_process as $prod) {
+        $qty = $prod['qty'];
+        $nama = $prod['nama'];
+        mysqli_query($conn, "UPDATE produk SET stok = stok - $qty WHERE nama_produk = '$nama'");
+    }
+
     // 4. BARIS TAMBAHAN: Kosongkan keranjang setelah data pembayaran aman tersimpan
     mysqli_query($conn, "DELETE FROM keranjang WHERE user_id = '$user_id'");
 
